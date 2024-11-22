@@ -4,6 +4,7 @@ import {ROUTES_API, ROUTES_SITE} from './utils/global.js';
 import {validarCampo} from './utils/form-utils.js';
 import {validarSenha, validarConfirmSenha, validarTexto} from './utils/validations.js';
 
+
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('registrationForm');
     const password = document.getElementById('password');

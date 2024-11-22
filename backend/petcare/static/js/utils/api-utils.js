@@ -59,9 +59,9 @@ export const tratamentosDeErros = {
                 }
             }
         },
-        unauthorized: (response) => {
+        unauthorized: (response, redirect = ROUTES_SITE.login) => {
             if(response.status == HTTP_STATUS.not_authorized) {
-                redirectTo(ROUTES_SITE.login)
+                redirectTo(redirect)
             }
         },
     },
@@ -77,9 +77,6 @@ export const tratamentosDeErros = {
                 if(response.status == HTTP_STATUS.bad_request){
                     redirectTo(ROUTES_SITE.cadastrar_informacoes);
                 }
-                if(response.status == HTTP_STATUS.not_authorized){
-                    redirectTo(ROUTES_SITE.bem_vindo);
-                }
             }
         }
     },
@@ -90,27 +87,14 @@ export const tratamentosDeErros = {
     }
 }
 
-export async function userIsAuthenticated(){
+export async function userIsAuth(callbackOk = (response) => {}, callbackError = (response) => {}){
     const headers = setAuthorizationTokenHeader();
-    const responseCaseError = (response) => {
-        tratamentosDeErros.accounts.unauthorized(response);
-    }
-    const responseCaseOk = async(response) => {
-        const data = await response.json();
-    }
-    await makeGetRequest(ROUTES_API.account_me, headers, responseCaseOk, responseCaseError)
+    await makeGetRequest(ROUTES_API.account_me, headers, callbackOk, callbackError);
 }
 
-export async function userHasRegister() {
+export async function userIsRegistered(callbackOk = (response) => {}, callbackError = (response) => {}) {
     const headers = setAuthorizationTokenHeader();
-    const responseCaseError = async(response) => {
-       tratamentosDeErros.owner.register.donthaveregister(response);
-    }
-    const responseCaseOk = async(response) => {
-        const data = await response.json();
-        return data;
-    }
-    return await makeGetRequest(ROUTES_API.owner_me, headers, responseCaseOk, responseCaseError);
+    return await makeGetRequest(ROUTES_API.owner_me, headers, callbackOk, callbackError);
 }
 
 export async function makeLogin(email, password, callbackResponseCaseError = (response) => {}, callbackResponseCaseOk = (response) => {}) {

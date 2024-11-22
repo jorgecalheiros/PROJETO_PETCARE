@@ -1,10 +1,13 @@
-import {userHasRegister, makePostRequest, setAuthorizationTokenHeader} from "./utils/api-utils.js";
+import {makePostRequest, setAuthorizationTokenHeader, userIsRegistered, tratamentosDeErros} from "./utils/api-utils.js";
 import {registrarPrototypes, validarCampo} from "./utils/form-utils.js";
 import {validarTexto} from "./utils/validations.js";
 import {ROUTES_API,HTTP_STATUS,ROUTES_SITE} from "./utils/global.js";
 import {showAlert, redirectTo} from "./utils/site-utils.js";
 
-userHasRegister();
+userIsRegistered((response) => {}, (response) => {
+  tratamentosDeErros.owner.register.donthaveregister(response);
+  tratamentosDeErros.accounts.unauthorized(response, ROUTES_SITE.bem_vindo);
+});
 
 document.addEventListener("DOMContentLoaded", async function(){
     const form = document.getElementById("registrationForm");

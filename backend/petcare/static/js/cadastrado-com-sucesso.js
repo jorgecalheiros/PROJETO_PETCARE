@@ -1,3 +1,3 @@
-import {userHasRegister} from './utils/api-utils.js';
+import {userIsRegistered, tratamentosDeErros} from './utils/api-utils.js';
 
-userHasRegister();
+userIsRegistered((response) => {},(response) => tratamentosDeErros.owner.register.donthaveregister(response));

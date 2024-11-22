@@ -1,11 +1,13 @@
-import {userIsAuthenticated, makeGetRequest, makePostRequest, setAuthorizationTokenHeader, tratamentosDeErros} from './utils/api-utils.js';
+import {makeGetRequest, makePostRequest, setAuthorizationTokenHeader, tratamentosDeErros, userIsAuth, userIsRegistered} from './utils/api-utils.js';
 import {redirectTo, showAlert} from './utils/site-utils.js';
 import {validarCampo, setValidationFeedback, validClass} from './utils/form-utils.js';
 import {validarCEP, validarCpF, validarTexto, validarTelefone} from "./utils/validations.js";
 import {removeCarecteresNaoNumericos} from './utils/validations.js';
-import {ROUTES_API, ROUTES_SITE} from './utils/global.js';
+import {HTTP_STATUS, ROUTES_API, ROUTES_SITE} from './utils/global.js';
 
-userIsAuthenticated();
+userIsRegistered((response) => {
+    if(response.status == HTTP_STATUS.ok) redirectTo(ROUTES_SITE.pagina_inicial);
+}, (response) => tratamentosDeErros.accounts.unauthorized(response));
 
 document.addEventListener("DOMContentLoaded", () => {
 

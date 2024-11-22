@@ -41,8 +41,8 @@ export function validarTelefone(value){
     let msg = "";
     value = removeCarecteresNaoNumericos(value);
 
-    if (value.length === 12) {
-        msg += "O telefone deve conter 12 carecteres";
+    if (value.length !== 13) {
+        msg += "O telefone deve conter 13 carecteres";
     } 
     return msg;
 }

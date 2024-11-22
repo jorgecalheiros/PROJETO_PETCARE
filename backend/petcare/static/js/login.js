@@ -1,8 +1,14 @@
 import {validarCampo, registrarPrototypes} from "./utils/form-utils.js";
 import {validarTexto, validarSenha} from "./utils/validations.js";
-import {makeLogin, tratamentosDeErros} from "./utils/api-utils.js";
+import {makeLogin, tratamentosDeErros, userIsAuth} from "./utils/api-utils.js";
 import {showAlert, redirectTo} from "./utils/site-utils.js";
-import {ROUTES_SITE} from "./utils/global.js";
+import {ROUTES_SITE, HTTP_STATUS} from "./utils/global.js";
+
+userIsAuth((response) => {
+    if(response.status == HTTP_STATUS.ok) {
+        redirectTo(ROUTES_SITE.pagina_inicial)
+    }
+})
 
 document.addEventListener("DOMContentLoaded", function(){
     const form = document.getElementById("loginForm");

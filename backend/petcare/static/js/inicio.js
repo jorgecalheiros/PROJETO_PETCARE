@@ -1,8 +1,11 @@
-import {userHasRegister,removeToken, makeGetRequest, setAuthorizationTokenHeader} from "./utils/api-utils.js";
-import {ROUTES_API} from "./utils/global.js";
+import {removeToken, makeGetRequest, setAuthorizationTokenHeader, userIsRegistered, tratamentosDeErros} from "./utils/api-utils.js";
+import {ROUTES_API, ROUTES_SITE} from "./utils/global.js";
 import { redirectTo } from "./utils/site-utils.js";
 
-userHasRegister();
+userIsRegistered((response) => {}, (response) => {
+    tratamentosDeErros.owner.register.donthaveregister(response);
+    tratamentosDeErros.accounts.unauthorized(response, ROUTES_SITE.bem_vindo);
+});
 
 document.addEventListener("DOMContentLoaded", async function(){
     const headers = setAuthorizationTokenHeader();

@@ -6,7 +6,8 @@ export const HTTP_STATUS = {
     not_acceptable: 406,
     not_authorized: 401,
     bad_request: 400,
-    created: 201
+    created: 201,
+    ok: 200
 }
 
 export const ROUTES_API = {
