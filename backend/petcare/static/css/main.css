@@ -33,6 +33,9 @@ body {
 .bg_orange_custom {
     background-color: var(--bg-primary);
 }
+.bg-orange{
+    background-color: var(--bg-primary);
+}
 .divisor {
     border-bottom: 2px solid var(--bg-primary);
     padding-bottom: 5rem;
