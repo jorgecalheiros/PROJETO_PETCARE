@@ -1,0 +1,5 @@
+@import "main.css";
+
+.section-title {
+    color: var(--bg-button);
+}

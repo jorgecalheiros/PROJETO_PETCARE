@@ -1,0 +1,66 @@
+{%extends 'layouts/base.html'%}
+
+{%block title %}
+PetCare - Inicio
+{%endblock%}
+
+{%block styles%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/inicio.css' %}">
+{%endblock%}
+
+{%block content%}
+<main>
+    <nav class="navbar navbar-expand-lg bg_orange_custom text-light" style="margin-bottom: 5rem;">
+        <div class="container-fluid">
+            <a class="navbar-brand text-light" href="#">Pet Care</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Configurações</a>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" aria-current="page" id="logout">Sair</button>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="container">
+        <div class="d-flex align-items-center justify-content-between">
+            <h2 class="section-title m-0">Meus Pets</h2>
+            <a class="btn btn-default" href="{% url 'cadastrar_pet' %}">Adicionar um pet</a>
+        </div>
+        <br/>
+        <br/>
+        <div class="container g-2">
+            <div class="row row-cols-1 row-cols-lg-5 g-2 g-lg-3" id="lista-pets">
+                <div class="col">
+                    <div class="card">
+                        <img src="{% static 'imgs/pluto.png' %}" class="card-img-top align-self-center mt-2" alt="..." style="width: 50%;">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-default">Historico Medico</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card">
+                        <img src="{% static 'imgs/pluto.png' %}" class="card-img-top align-self-center mt-2" alt="..." style="width: 50%;">
+                        <div class="card-body">
+                          <h5 class="card-title">Card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <a href="#" class="btn btn-default">Historico Medico</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<script type="module" src="{% static 'js/inicio.js' %}"></script>
+{%endblock%}
