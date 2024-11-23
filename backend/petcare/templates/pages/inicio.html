@@ -64,33 +64,39 @@ PetCare - Inicio
             </div>
           </div>
         </div>
-      </header>
-    <section class="container">
-        <div class="d-flex align-items-center justify-content-between">
-            <h2 class="section-title m-0">Meus Pets</h2>
-            <a class="btn btn-default" href="{% url 'cadastrar_pet' %}">Adicionar um pet</a>
-        </div>
-        <br/>
-        <br/>
-        <div class="container g-2">
-            <div class="row row-cols-1 row-cols-lg-5 g-2 g-lg-3" id="lista-pets">
+    </header>
+    <section class="metricas">
+        <div class="container">
+            <div class="row gap-2">
                 <div class="col">
-                    <div class="card">
-                        <img src="{% static 'imgs/pluto.png' %}" class="card-img-top align-self-center mt-2" alt="..." style="width: 50%;">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-default">Historico Medico</a>
+                    <div class="card p-2 shadow border-0">
+                        <div class="card-body" style="margin-left:3rem;">
+                            <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-paw icon"></i>
+                                <div class="mx-3">
+                                    <p class="card-text fs-1 m-0 p-0 text-orange" id="total-pets">2</p>
+                                    <p class="text-muted">Pets</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a class="btn btn-orange" href="#">Ver detalhes</a>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card">
-                        <img src="{% static 'imgs/pluto.png' %}" class="card-img-top align-self-center mt-2" alt="..." style="width: 50%;">
-                        <div class="card-body">
-                          <h5 class="card-title">Card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <a href="#" class="btn btn-default">Historico Medico</a>
+                    <div class="card p-2 shadow border-0">
+                        <div class="card-body" style="margin-left:3rem;">
+                            <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-magnifying-glass icon"></i>
+                                <div class="mx-3">
+                                    <p class="card-text fs-1 m-0 p-0 text-orange" id="total-consultas">0</p>
+                                    <p class="text-muted">Consultas agendadas</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a class="btn btn-orange" href="#">Ver detalhes</a>
                         </div>
                     </div>
                 </div>

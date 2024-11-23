@@ -3,3 +3,6 @@
 .section-title {
     color: var(--bg-button);
 }
+.icon {
+    font-size: 70px;
+}

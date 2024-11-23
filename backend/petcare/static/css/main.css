@@ -26,6 +26,7 @@ body {
     font-weight: bold;
     color: white;
 }
+.btn-orange:hover,
 .btn-default:hover{
     background-color: var(--bg-button-hover);
     color: white;
@@ -35,6 +36,13 @@ body {
 }
 .bg-orange{
     background-color: var(--bg-primary);
+}
+.btn-orange {
+    background-color: var(--bg-button);
+    color: white;
+}
+.text-orange {
+    color: var(--bg-button);
 }
 .divisor {
     border-bottom: 2px solid var(--bg-primary);
