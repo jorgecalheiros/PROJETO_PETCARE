@@ -8,5 +8,6 @@ urlpatterns = [
     path('cadastrado', CadastradoComSucessoView.as_view(), name="cadastrado_com_sucesso"),
     path('login', LoginView.as_view(), name="login"),
     path('', InicioView.as_view(), name="inicio"),
-    path('cadastrar/pet', CadastrarPetView.as_view(), name="cadastrar_pet")
+    path('cadastrar/pet', CadastrarPetView.as_view(), name="cadastrar_pet"),
+    path('meuspets', PetsView.as_view(), name="meuspets")
 ]
