@@ -1,7 +1,7 @@
 {%extends 'layouts/base.html'%}
 
 {%block title %}
-PetCare - Login
+PetCare - Pets
 {%endblock%}
 
 {%block styles%}
@@ -69,9 +69,13 @@ PetCare - Login
         <div class="card shadow border-0 p-3">
             <h3 class="card-title"><u>Meus pets</u></h3>
             <div class="card-body">
-                <div class="d-flex justify-content-end">
-                    <p>Total: 12</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <button class="btn btn-orange" data-bs-toggle="modal" data-bs-target="#cadastrar-pet">
+                    Adicionar Pet
+                  </button>  
+                  <p class="m-0">Total: 12</p>
                 </div>
+                <br/>
                 <div>
                     <div class="card p-1">
                         <div class="card-header bg-transparent d-flex align-items-center justify-content-center">
@@ -95,6 +99,23 @@ PetCare - Login
                 </div>
             </div>
         </div>
+    </div>
+    <div class="modal fade" id="cadastrar-pet" tabindex="-1" aria-labelledby="cadastrar-pet-label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="cadastrar-pet-label">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
     </div>
 </main>
 {%endblock%}
