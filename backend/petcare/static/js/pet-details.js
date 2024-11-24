@@ -10,7 +10,7 @@ userIsRegistered((response) => {}, (response) => {
 document.addEventListener("DOMContentLoaded", async function(){
     const buttonLogout = document.getElementById("logout");
     const headers = setAuthorizationTokenHeader();
-    const list_medicamento = $("#list-medicamentos").empty();
+    const list_medicamento = $("#list-medicamentos");
     const id = capturarUUID();
 
     const raca = document.getElementById("raca");
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", async function(){
     const genero = document.getElementById("genero");
     const nome = document.getElementById("nome");
     const codigo = document.getElementById("codigo");
+    const obs = document.getElementById("obs");
 
     logout(buttonLogout);
 
@@ -34,8 +35,10 @@ document.addEventListener("DOMContentLoaded", async function(){
         peso.innerHTML = `${data.weight} kg`;
         genero.innerHTML = data.gender.description;
         codigo.innerHTML = data.id;
+        obs.innerHTML = historico_medico.obs;
+        
 
-        appendOnMedicines(medicines);
+        //appendOnMedicines(medicines);
         
     }); 
     
