@@ -1,3 +1,5 @@
+import {removeToken} from "./api-utils.js";
+
 export function redirectTo(url, time = 0) {
     setTimeout(() => {
         window.location = url
@@ -10,4 +12,11 @@ export function showAlert(message, type, placeholder){
     wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
 
     placeholder.append(wrapper)
+}
+
+export function logout(button){
+    button.addEventListener("click", () => {
+        removeToken();
+        redirectTo(window.location);
+    })
 }

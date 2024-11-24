@@ -1,6 +1,6 @@
-import {removeToken, makeGetRequest, setAuthorizationTokenHeader, userIsRegistered, tratamentosDeErros} from "./utils/api-utils.js";
+import {makeGetRequest, setAuthorizationTokenHeader, userIsRegistered, tratamentosDeErros} from "./utils/api-utils.js";
 import {ROUTES_API, ROUTES_SITE} from "./utils/global.js";
-import { redirectTo } from "./utils/site-utils.js";
+import { buttonLogout } from "./utils/site-utils.js";
 
 userIsRegistered((response) => {}, (response) => {
     tratamentosDeErros.owner.register.donthaveregister(response);
@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", async function(){
     const headers = setAuthorizationTokenHeader();
     const listaPets = $("#lista-pets").empty(); 
     const buttonLogout = document.getElementById("logout");
+
+    logout(buttonLogout);
 
     await makeGetRequest(ROUTES_API.get_pets, headers, async(response) => {
         const data = await response.json();
@@ -42,10 +44,6 @@ document.addEventListener("DOMContentLoaded", async function(){
             listaPets.append(linha);
         })
     });
-    buttonLogout.addEventListener("click", () => {
-        removeToken();
-        redirectTo(window.location);
-    })
     
 });
 

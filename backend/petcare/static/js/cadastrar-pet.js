@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", async function(){
           const responseCaseOk = async(response) => {
             if (response.status == HTTP_STATUS.created){
                 showAlert("Pet cadastrado com sucesso!", "success", alertplaceholder);
-                redirectTo(ROUTES_SITE.pagina_inicial, 2000);
+                redirectTo(ROUTES_SITE.meuspets, 2000);
             }
           }
           const responseCaseError = async(response) => {

@@ -26,5 +26,6 @@ export const ROUTES_SITE = {
     cadastrar_conta: "/cadastrar/conta",
     pagina_inicial: "/",
     bem_vindo: "/bemvindo",
-    cadastrado_com_sucesso : "/cadastrado"
+    cadastrado_com_sucesso : "/cadastrado",
+    meuspets: "/meuspets",
 }

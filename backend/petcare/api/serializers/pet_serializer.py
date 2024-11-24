@@ -17,5 +17,6 @@ class PetDetailSerializer(BaseModelSerializer):
         model = Pet
         
 class PetSerializer(BaseModelSerializer):
+    gender = GenderSerializer(read_only=True)
     class Meta(BaseModelSerializer.Meta):
         model = Pet
