@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", async function(){
                             </div>
                         </div>
                         <div class="card-footer bg-transparent">
-                            <a class="btn btn-orange" href="#">Historico medico</a>
+                            <a class="btn btn-orange" href="/pets/${item.id}">Historico medico</a>
                         </div>
                     </div>
                 

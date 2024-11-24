@@ -9,5 +9,6 @@ urlpatterns = [
     path('login', LoginView.as_view(), name="login"),
     path('', InicioView.as_view(), name="inicio"),
     path('cadastrar/pet', CadastrarPetView.as_view(), name="cadastrar_pet"),
-    path('meuspets', PetsView.as_view(), name="meuspets")
+    path('meuspets', PetsView.as_view(), name="meuspets"),
+    path('pets/<str:id>/', PetsDetailsView.as_view(), name="pet-details")
 ]

@@ -20,3 +20,15 @@ export function logout(button){
         redirectTo(window.location);
     })
 }
+
+export function capturarUUID(){
+    const pathname = window.location.pathname;
+
+    // Define uma expressão regular para capturar o UUID
+    const uuidRegex = /[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}/;
+
+    // Executa a regex no caminho
+    const match = pathname.match(uuidRegex);
+
+    return match[0];
+}
