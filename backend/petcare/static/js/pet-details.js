@@ -10,6 +10,7 @@ userIsRegistered((response) => {}, (response) => {
 document.addEventListener("DOMContentLoaded", async function(){
     const buttonLogout = document.getElementById("logout");
     const headers = setAuthorizationTokenHeader();
+    const list_medicamento = $("#list-medicamentos").empty();
     const id = capturarUUID();
 
     const raca = document.getElementById("raca");
@@ -24,6 +25,8 @@ document.addEventListener("DOMContentLoaded", async function(){
 
     await makeGetRequest(`${ROUTES_API.get_pets}/${id}`, headers, async(response) => {
         const data = await response.json();
+        const historico_medico = data.medical_history;
+        const medicines = historico_medico.medicines;
         nome.innerHTML = data.name;
         raca.innerHTML = data.race;
         especie.innerHTML = data.species;
@@ -31,6 +34,23 @@ document.addEventListener("DOMContentLoaded", async function(){
         peso.innerHTML = `${data.weight} kg`;
         genero.innerHTML = data.gender.description;
         codigo.innerHTML = data.id;
+
+        appendOnMedicines(medicines);
+        
     }); 
     
+    function appendOnMedicines(medicines){
+        appendData(medicines, "Sem medicamentos cadastrados.", list_medicamento, (medicine) => {
+            console.log(medicine);
+        });
+    }
+
+    function appendData(array, message, element , callback = (item) => {}){
+        if(array.length == 0) {
+            element.append(message);
+        }else{
+            array.forEach((item) => callback(item));
+        }
+    }
+
 });
