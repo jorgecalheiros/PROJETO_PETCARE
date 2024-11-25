@@ -1,19 +1,17 @@
-import {makeGetRequest, setAuthorizationTokenHeader, userIsRegistered, tratamentosDeErros} from "./utils/api-utils.js";
+import {makeGetRequest, setAuthorizationTokenHeader, tratamentosDeErros, user_have_register} from "./utils/api-utils.js";
 import {ROUTES_API, ROUTES_SITE} from "./utils/global.js";
-import {logout } from "./utils/site-utils.js";
 
-userIsRegistered((response) => {}, (response) => {
-    tratamentosDeErros.owner.register.donthaveregister(response);
-    tratamentosDeErros.accounts.unauthorized(response, ROUTES_SITE.bem_vindo);
-});
+user_have_register(() => {}, 
+    (response) => {
+        tratamentosDeErros.owner.register.dont_have_register(response);
+        tratamentosDeErros.accounts.unauthorized(response, ROUTES_SITE.bem_vindo);
+    }
+)
 
 document.addEventListener("DOMContentLoaded", async function(){
     const headers = setAuthorizationTokenHeader();
     const listaPets = $("#list").empty(); 
     const total = $("#total");
-    const buttonLogout = document.getElementById("logout");
-
-    logout(buttonLogout);
 
     await makeGetRequest(ROUTES_API.get_pets, headers, async(response) => {
         const data = await response.json();

@@ -1,14 +1,15 @@
-import {makeGetRequest, setAuthorizationTokenHeader, userIsRegistered, tratamentosDeErros} from "./utils/api-utils.js";
+import {makeGetRequest, setAuthorizationTokenHeader, user_have_register, tratamentosDeErros} from "./utils/api-utils.js";
 import {ROUTES_API, ROUTES_SITE} from "./utils/global.js";
-import {logout, capturarUUID } from "./utils/site-utils.js";
+import {capturarUUID } from "./utils/site-utils.js";
 
-userIsRegistered((response) => {}, (response) => {
-    tratamentosDeErros.owner.register.donthaveregister(response);
-    tratamentosDeErros.accounts.unauthorized(response, ROUTES_SITE.bem_vindo);
-});
+await user_have_register(() => {}, 
+    (response) => {
+        tratamentosDeErros.owner.register.dont_have_register(response);
+        tratamentosDeErros.accounts.unauthorized(response, ROUTES_SITE.bem_vindo);
+    }
+)
 
 document.addEventListener("DOMContentLoaded", async function(){
-    const buttonLogout = document.getElementById("logout");
     const headers = setAuthorizationTokenHeader();
     const list_medicamento = $("#list-medicamentos");
     const id = capturarUUID();
@@ -22,7 +23,6 @@ document.addEventListener("DOMContentLoaded", async function(){
     const codigo = document.getElementById("codigo");
     const obs = document.getElementById("obs");
 
-    logout(buttonLogout);
 
     await makeGetRequest(`${ROUTES_API.get_pets}/${id}`, headers, async(response) => {
         const data = await response.json();

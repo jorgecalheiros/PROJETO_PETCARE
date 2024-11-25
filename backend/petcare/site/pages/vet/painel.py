@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
 
-class InicioVetView(View):
+class PainelView(View):
     def get(self, request):
-        return render(request, 'pages/inicio_vet.html')
+        return render(request, 'pages/painel.html')

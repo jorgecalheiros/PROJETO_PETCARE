@@ -1,11 +1,11 @@
-import {makePostRequest, setAuthorizationTokenHeader, userIsRegistered, tratamentosDeErros} from "./utils/api-utils.js";
+import {makePostRequest, setAuthorizationTokenHeader, tratamentosDeErros, user_have_register} from "./utils/api-utils.js";
 import {registrarPrototypes, validarCampo} from "./utils/form-utils.js";
 import {validarTexto} from "./utils/validations.js";
 import {ROUTES_API,HTTP_STATUS,ROUTES_SITE} from "./utils/global.js";
 import {showAlert, redirectTo} from "./utils/site-utils.js";
 
-userIsRegistered((response) => {}, (response) => {
-  tratamentosDeErros.owner.register.donthaveregister(response);
+user_have_register((response) => {}, (response) => {
+  tratamentosDeErros.owner.register.dont_have_register(response);
   tratamentosDeErros.accounts.unauthorized(response, ROUTES_SITE.bem_vindo);
 });
 

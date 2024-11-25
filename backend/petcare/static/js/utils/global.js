@@ -6,6 +6,7 @@ export const HTTP_STATUS = {
     not_acceptable: 406,
     not_authorized: 401,
     bad_request: 400,
+    forbidden: 403,
     created: 201,
     ok: 200
 }
@@ -17,7 +18,9 @@ export const ROUTES_API = {
     register_owner : "/owner/",
     owner_me: "/owner/me",
     get_pets: "/pet",
-    register_pet: "/pet/"
+    register_pet: "/pet/",
+    register_clinic: "/clinic/",
+    vet_me: "/vet/me",
 }
 
 export const ROUTES_SITE = {
@@ -28,4 +31,6 @@ export const ROUTES_SITE = {
     bem_vindo: "/bemvindo",
     cadastrado_com_sucesso : "/cadastrado",
     meuspets: "/meuspets",
+    clinica_cadastrada: "/clinicacadastradacomsucesso",
+    painel: "/painel"
 }

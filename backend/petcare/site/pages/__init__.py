@@ -3,4 +3,4 @@ from .login import LoginView
 from .cadastrar_dono import CadastrarContaView, CadastrarInfoView, CadastradoComSucessoView
 from .inicio import InicioView
 from .pet import CadastrarPetView, PetsView, PetsDetailsView
-from .vet import LoginVetView, CadastrarClinicaVetView, SouClinicaVetView, InicioVetView
+from .vet import LoginVetView, CadastrarClinicaVetView, SouClinicaVetView, PainelView, CadastradoComSucessoVetView

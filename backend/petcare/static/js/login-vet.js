@@ -14,5 +14,5 @@ document.addEventListener("DOMContentLoaded", function(){
 
     registrarPrototypes()
 
-    form.validarFormularioLogin(ROUTES_SITE.pagina_inicial);
+    form.validarFormularioLogin(ROUTES_SITE.painel);
 });

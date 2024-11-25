@@ -13,4 +13,7 @@ urlpatterns = [
     path('pets/<str:id>/', PetsDetailsView.as_view(), name="pet-details"),
     path('souclinica', SouClinicaVetView.as_view(), name="souclinica"),
     path('cadastrarclinica', CadastrarClinicaVetView.as_view(), name="cadastrarclinica"),
+    path('clinicacadastradacomsucesso', CadastradoComSucessoVetView.as_view(), name="clinicacadastrada"),
+    path('loginveterinario', LoginVetView.as_view(), name="loginvet"),
+    path('painel', PainelView.as_view(), name="painel"),
 ]

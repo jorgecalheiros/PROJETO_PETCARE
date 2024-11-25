@@ -73,10 +73,17 @@ export const tratamentosDeErros = {
                     redirectTo(ROUTES_SITE.login, 3000);
                 }
             },
-            donthaveregister: (response) => {
+            dont_have_register: (response) => {
                 if(response.status == HTTP_STATUS.bad_request){
                     redirectTo(ROUTES_SITE.cadastrar_informacoes);
                 }
+            }
+        }
+    },
+    vet: {
+        is_not_a_vet: (response) => {
+            if(response.status == HTTP_STATUS.forbidden){
+                redirectTo(ROUTES_SITE.bem_vindo);
             }
         }
     },
@@ -87,14 +94,19 @@ export const tratamentosDeErros = {
     }
 }
 
-export async function userIsAuth(callbackOk = (response) => {}, callbackError = (response) => {}){
+export async function user_auth(callbackOk = (response) => {}, callbackError = (response) => {}){
     const headers = setAuthorizationTokenHeader();
     await makeGetRequest(ROUTES_API.account_me, headers, callbackOk, callbackError);
 }
 
-export async function userIsRegistered(callbackOk = (response) => {}, callbackError = (response) => {}) {
+export async function user_have_register(callbackOk = (response) => {}, callbackError = (response) => {}) {
     const headers = setAuthorizationTokenHeader();
     return await makeGetRequest(ROUTES_API.owner_me, headers, callbackOk, callbackError);
+}
+
+export async function user_is_vet_registered(callbackOk = (response) => {}, callbackError = (response) => {}) {
+    const headers = setAuthorizationTokenHeader();
+    return await makeGetRequest(ROUTES_API.vet_me, headers, callbackOk, callbackError)
 }
 
 export async function makeLogin(email, password, callbackResponseCaseError = (response) => {}, callbackResponseCaseOk = (response) => {}) {
