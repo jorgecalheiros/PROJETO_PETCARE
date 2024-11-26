@@ -107,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     password: password.value
                 },
                 name: nome.value,
+                phone: removeCarecteresNaoNumericos(phone.value),
                 specialization: especializacao.value
             },
             address: {
