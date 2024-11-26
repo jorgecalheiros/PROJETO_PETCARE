@@ -56,6 +56,7 @@ class MiranteViewSet(BaseAuthenticatedViewSet, viewsets.ViewSet):
             "email":settings.MIRANTE_CREDENTIALS_LOGIN_EMAIL,
             "password":settings.MIRANTE_CREDENTIALS_LOGIN_PASSWORD
         }
+
         response = self.__request_post(settings.MIRANTE_AUTHENTICATE, data, {})
         
         if isinstance(response, dict) and response.get('token'):

@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     validarCampo(cep, feedback_cep, validarCEP);
     validarCampo(estado, feedback_estado, validarTexto);
     validarCampo(cidade, feedback_cidade, validarTexto);
+    cadastrarComMirante();
 
     form.addEventListener("submit", async function (event) {
         event.preventDefault();  
@@ -45,7 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = constructFormData();
 
         const responseCaseOK = async(response) => {
-            redirectTo(ROUTES_SITE.cadastrado_com_sucesso);
+            if(response.ok){
+                redirectTo(ROUTES_SITE.cadastrado_com_sucesso);
+            }
         }
         const responseCaseError = async(response) => {
             tratamentosDeErros.owner.register.already_registered(response,(message) => {showAlert(message,"danger",alertplaceholder)})
@@ -80,6 +83,22 @@ document.addEventListener("DOMContentLoaded", () => {
     
                 await makeGetRequest(url, {},responseCaseOK, responseCaseError)
             }
+        })
+    }
+    function cadastrarComMirante(){
+        document.getElementById("mirante").addEventListener("click", async() => {
+            const headers = setAuthorizationTokenHeader();
+            const responseCaseOK = async(response) => {
+                if(response.ok){
+                    redirectTo(ROUTES_SITE.cadastrado_com_sucesso);
+                }
+            }
+            const responseCaseError = async(response) => {
+                const data = await response.json();
+                console.log(data);
+            }
+
+            await makePostRequest(ROUTES_API.mirante_create, headers, {},responseCaseOK,responseCaseError);
         })
     }
     function constructFormData(){

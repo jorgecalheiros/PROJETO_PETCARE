@@ -10,7 +10,7 @@ def upload_image(instance, filename):
 class Owner(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(max_length=255)
-    photo = models.ImageField(upload_to=upload_image)
+    photo = models.ImageField(upload_to=upload_image, null=True)
     cpf = models.CharField(max_length=11, unique=True)
     phone = models.CharField(max_length=13, null=True)
     address = models.OneToOneField(Address, on_delete=models.CASCADE, null=True)

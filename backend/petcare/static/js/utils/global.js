@@ -22,6 +22,7 @@ export const ROUTES_API = {
     register_clinic: "/clinic/",
     vet_me: "/vet/me",
     vet_pets: "/vet/pets",
+    mirante_create: "/mirante/create-with-mirante/",
 }
 
 export const ROUTES_SITE = {
