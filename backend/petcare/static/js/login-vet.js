@@ -5,7 +5,7 @@ import {ROUTES_SITE, HTTP_STATUS} from "./utils/global.js";
 
 user_auth((response) => {
     if(response.status == HTTP_STATUS.ok) {
-        redirectTo(ROUTES_SITE.pagina_inicial)
+        redirectTo(ROUTES_SITE.painel)
     }
 })
 

@@ -30,5 +30,14 @@ export function capturarUUID(){
     // Executa a regex no caminho
     const match = pathname.match(uuidRegex);
 
-    return match[0];
+    if (match !== null) {
+        return match[0]
+    }
+
+    return false;
 }
+
+export function formatarData(value){
+    return value
+}
+

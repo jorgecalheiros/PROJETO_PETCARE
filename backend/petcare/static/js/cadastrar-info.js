@@ -1,4 +1,4 @@
-import {makeGetRequest, makePostRequest, setAuthorizationTokenHeader, tratamentosDeErros, user_have_register, userIsAuth, userIsRegistered} from './utils/api-utils.js';
+import {makeGetRequest, makePostRequest, setAuthorizationTokenHeader, tratamentosDeErros, user_have_register} from './utils/api-utils.js';
 import {redirectTo, showAlert} from './utils/site-utils.js';
 import {validarCampo, setValidationFeedback, validClass} from './utils/form-utils.js';
 import {validarCEP, validarCpF, validarTexto, validarTelefone} from "./utils/validations.js";

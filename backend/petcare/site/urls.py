@@ -1,5 +1,6 @@
 from django.urls import path
 from .pages import *
+from .pages import vet
 
 urlpatterns = [
     path('bemvindo', BemVindoView.as_view(), name='bem_vindo'),
@@ -16,4 +17,6 @@ urlpatterns = [
     path('clinicacadastradacomsucesso', CadastradoComSucessoVetView.as_view(), name="clinicacadastrada"),
     path('loginveterinario', LoginVetView.as_view(), name="loginvet"),
     path('painel', PainelView.as_view(), name="painel"),
+    path('pesquisarpet', vet.pesquisar_por_um_pet, name="pesquisarpet"),
+    path('pesquisarpet/<str:id>', vet.pesquisar_por_um_pet_id, name="pesquisarpetid"),
 ]

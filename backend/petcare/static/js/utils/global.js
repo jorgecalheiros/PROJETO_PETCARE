@@ -21,6 +21,7 @@ export const ROUTES_API = {
     register_pet: "/pet/",
     register_clinic: "/clinic/",
     vet_me: "/vet/me",
+    vet_pets: "/vet/pets",
 }
 
 export const ROUTES_SITE = {
@@ -32,5 +33,6 @@ export const ROUTES_SITE = {
     cadastrado_com_sucesso : "/cadastrado",
     meuspets: "/meuspets",
     clinica_cadastrada: "/clinicacadastradacomsucesso",
-    painel: "/painel"
+    painel: "/painel",
+    pesquisar_pet: "/pesquisarpet",
 }

@@ -9,5 +9,5 @@ class Medicine(models.Model):
     name = models.CharField(max_length=255)
     date_application = models.DateTimeField()
     date_reinforcement = models.DateTimeField()
-    details = models.TextField(null=True)
+    details = models.TextField(null=True, blank=True)
     medical_history = models.ForeignKey(MedicalHistory, on_delete=models.CASCADE, null=False, related_name='medicines') 
