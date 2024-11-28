@@ -88,11 +88,11 @@ PetCare - Pesquisar por um Pet
                                 <div class="card p-3">
                                     <div class="card-body" id="list-medicamentos">
                                         <div class="border-bottom">
-                                            <p>Nome: <strong id="nome-medicamento"></strong></p>
-                                            <p>Tipo: <strong id="tipo"></strong></p>
-                                            <p>Data da aplicação: <strong id="data-aplicacao"></strong></p>
-                                            <p>Data de reforço: <strong id="data-reforco"></strong></p>
-                                            <p>Detalhes: <strong id="detalhes"></strong></p>
+                                            <p>Nome: <strong></strong></p>
+                                            <p>Tipo: <strong></strong></p>
+                                            <p>Data da aplicação: <strong></strong></p>
+                                            <p>Data de reforço: <strong></strong></p>
+                                            <p>Detalhes: <strong></strong></p>
                                         </div>
                                     </div>
                                 </div>
@@ -174,8 +174,8 @@ PetCare - Pesquisar por um Pet
                     </p>
                 </div>
                 <div class="mb-3 input-group">
-                    <label class="input-group-text" for="nome-medicamento-input">Nome do medicamento <span class="text-danger mx-1">*</span></label>
-                    <input type="text" class="form-control" id="nome-medicamento-input" required maxlength="200" >
+                    <label class="input-group-text" for="nome-medicamento">Nome do medicamento <span class="text-danger mx-1">*</span></label>
+                    <input type="text" class="form-control" id="nome-medicamento" required maxlength="200" >
                     <div class="invalid-feedback" id="invalid-feedback-nome-medicamento">
                         Por favor, insira o nome do medicamento.
                     </div>
@@ -226,7 +226,7 @@ PetCare - Pesquisar por um Pet
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="needs-validation" id="form-editar-medicamento" novalidate>
+                    <form class="needs-validation" id="form-medicamento-editar" novalidate>
                         <div class="mb-4">
                             <div id="placeholder-medicamento-editar"></div>
                         </div>
@@ -235,7 +235,7 @@ PetCare - Pesquisar por um Pet
                                 Campos marcados com <span class="text-danger mx-1">*</span> são obrigatórios.
                             </p>
                         </div>
-                        <input type="hidden" id="medicamento-id-editar" /> 
+                        <input type="hidden" id="id-medicamento-editar" /> 
                         <div class="mb-3 input-group">
                             <label for="nome-medicamento-editar" class="input-group-text">Nome do medicamento <span class="text-danger mx-1">*</span></label>
                             <input type="text" class="form-control" id="nome-medicamento-editar" maxlength="200" required>
@@ -348,6 +348,74 @@ PetCare - Pesquisar por um Pet
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     <button type="submit" class="btn btn-orange">Adicionar</button>
                   </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editar-doenca-modal" tabindex="-1" aria-labelledby="editar-doenca-modal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Editar doença</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="needs-validation" id="form-doenca-editar" novalidate>
+                <div class="mb-4">
+                    <div id="placeholder-doenca-editar"></div>
+                </div>
+                <div>
+                    <p>
+                        Campos marcados com <span class="text-danger mx-1">*</span> são obrigatórios.
+                    </p>
+                </div>
+                <input type="hidden" id="id-doenca-editar" /> 
+                <div class="mb-3 input-group">
+                    <label for="nome-doenca-editar" class="input-group-text">Nome da doença <span class="text-danger mx-1">*</span></label>
+                    <input type="text" class="form-control" id="nome-doenca-editar" required maxlength="200">
+                    <div class="invalid-feedback" id="invalid-feedback-nome-doenca-editar">
+                        Por favor, insira o nome da doença.
+                    </div>
+                </div>
+                <div class="mb-3 form-floating">
+                    <textarea class="form-control" placeholder="Digite os sintomas" id="sintomas-doenca-editar" style="height: 100px" required></textarea>
+                    <label for="sintomas-doenca-editar">Sintomas <span class="text-danger mx-1">*</span></label>
+                    <div class="invalid-feedback" id="invalid-feedback-sintomas-doeca-editar">
+                        Por favor, insira os sitomas da doença.
+                    </div>
+                </div>
+
+                <div class="mb-3 form-floating">
+                    <textarea class="form-control" placeholder="Descrição da doença" id="descricao-doenca-editar" style="height: 100px"></textarea>
+                    <label for="descricao-doenca-editar">Detalhes</label>
+                </div>
+
+                <div class="mb-3 input-group">
+                    <label for="data-diagnostico-doenca-editar"  class="input-group-text">Data do diagnostico <span class="text-danger mx-1">*</span></label>
+                    <input type="date" class="form-control" id="data-diagnostico-doenca-editar" required>
+                    <div class="invalid-feedback" id="invalid-feedback-data-diagnostico-doenca-editar">
+                        Por favor, informe a data de diagnostico.
+                    </div>
+                </div>
+
+                <div class="mb-3 input-group">
+                    <label for="status-doenca-editar" class="input-group-text">Status da doença <span class="text-danger mx-1">*</span></label>
+                    <select class="form-select" aria-label="Status da doença" id="status-doenca-editar" required>
+                        <option selected hidden value="">Escolha</option>
+                        <option value="1">Em Tratamento</option>
+                        <option value="2">Recuperado</option>
+                        <option value="3">Crônico</option>
+                      </select>
+                    <div class="invalid-feedback" id="invalid-feedback-status-doenca-editar">
+                        Por favor, informe a situação atual da doença.
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-orange">Salvar</button>
+                </div>
               </form>
             </div>
           </div>

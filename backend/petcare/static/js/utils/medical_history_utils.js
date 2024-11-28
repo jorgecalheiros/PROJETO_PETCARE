@@ -55,7 +55,7 @@ export function renderizarListaDoencas(data){
                     <p>Descrição: <strong>${item.description}</strong></p>
                     <p>Data do diagnostico: <strong>${formatarData(item.date_diagnosis)}</strong></p>
                     <div class="mb-2">
-                        <button class="btn btn-primary" data-doenca='${JSON.stringify(item)}' onclick="carregarDadosDoencaParaEdicao(this)" data-bs-toggle="modal" data-bs-target="#editar-medicamento-modal">
+                        <button class="btn btn-primary" data-doenca='${JSON.stringify(item)}' onclick="carregarDadosDoencaParaEdicao(this)" data-bs-toggle="modal" data-bs-target="#editar-doenca-modal">
                             Editar
                         </button>
                         <button class="btn btn-danger" data-id='${item.id}' onclick="excluirDoenca(this)">
