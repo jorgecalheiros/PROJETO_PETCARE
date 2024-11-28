@@ -100,7 +100,12 @@ PetCare - Pesquisar por um Pet
                         </div>
                         <br/>
                         <div>
-                            <h5><u>Doenças documentadas</u></h5>
+                            <div class="d-lg-flex justify-content-between align-items-end mb-2">
+                                <h5><u>Doenças documentadas</u></h5>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#doenca-modal">
+                                    Adicionar um doença 
+                                </button>
+                            </div>
                             <div>
                                 <div class="card p-3">
                                     <div class="card-body" id="list-doencas">
@@ -160,32 +165,37 @@ PetCare - Pesquisar por um Pet
             </div>
             <div class="modal-body">
               <form class="needs-validation" id="form-medicamento" novalidate>
-                <div class="mb-4">
+                <div class="mb-3">
                     <div id="placeholder-medicamento"></div>
-                  </div>
-                <div class="mb-4">
-                    <label for="nome-medicamento-input" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome-medicamento-input" required>
+                </div>
+                <div>
+                    <p>
+                        Campos marcados com <span class="text-danger mx-1">*</span> são obrigatórios.
+                    </p>
+                </div>
+                <div class="mb-3 input-group">
+                    <label class="input-group-text" for="nome-medicamento-input">Nome do medicamento <span class="text-danger mx-1">*</span></label>
+                    <input type="text" class="form-control" id="nome-medicamento-input" required maxlength="200" >
                     <div class="invalid-feedback" id="invalid-feedback-nome-medicamento">
                         Por favor, insira o nome do medicamento.
                     </div>
                 </div>
-                <div class="mb-4">
-                    <label for="data-aplicacao-medicamento" class="form-label">Data da aplicação</label>
+                <div class="mb-3 input-group">
+                    <label class="input-group-text" for="data-aplicacao-medicamento">Data da aplicação <span class="text-danger mx-1">*</span></label>
                     <input type="date" class="form-control" id="data-aplicacao-medicamento" required>
                     <div class="invalid-feedback" id="invalid-feedback-data-aplicacao-medicamento">
                         Por favor, informe a data de aplicação.
                     </div>
                 </div>
-                <div class="mb-4">
-                    <label for="data-reforco-medicamento" class="form-label">Data de reforço</label>
+                <div class="mb-3 input-group">
+                    <label for="data-reforco-medicamento" class="input-group-text" >Data de reforço <span class="text-danger mx-1">*</span></label>
                     <input type="date" class="form-control" id="data-reforco-medicamento" required>
                     <div class="invalid-feedback" id="invalid-feedback-data-reforco-medicamento">
                         Por favor, informe a data de reforço.
                     </div>
                 </div>
-                <div class="mb-4">
-                    <label for="tipo-medicamento" class="form-label">Tipo do medicamento</label>
+                <div class="mb-2 input-group">
+                    <label for="tipo-medicamento" class="input-group-text">Tipo do medicamento <span class="text-danger mx-1">*</span></label>
                     <select class="form-select" aria-label="Tipo do medicamento" id="tipo-medicamento" required>
                         <option selected hidden value="">Escolha</option>
                         <option value="1">Vacina</option>
@@ -199,6 +209,141 @@ PetCare - Pesquisar por um Pet
                     <textarea class="form-control" placeholder="Leave a comment here" id="detalhes-medicamento" style="height: 100px"></textarea>
                     <label for="detalhes-medicamento">Detalhes</label>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-orange">Adicionar</button>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editar-medicamento-modal" tabindex="-1" aria-labelledby="editar-medicamento-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="editar-medicamento-modal-title">Editar Medicamento</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="needs-validation" id="form-editar-medicamento" novalidate>
+                        <div class="mb-4">
+                            <div id="placeholder-medicamento-editar"></div>
+                        </div>
+                        <div>
+                            <p>
+                                Campos marcados com <span class="text-danger mx-1">*</span> são obrigatórios.
+                            </p>
+                        </div>
+                        <input type="hidden" id="medicamento-id-editar" /> 
+                        <div class="mb-3 input-group">
+                            <label for="nome-medicamento-editar" class="input-group-text">Nome do medicamento <span class="text-danger mx-1">*</span></label>
+                            <input type="text" class="form-control" id="nome-medicamento-editar" maxlength="200" required>
+                            <div class="invalid-feedback" id="invalid-feedback-nome-medicamento-editar">
+                                Por favor, insira o nome do medicamento.
+                            </div>
+                        </div>
+    
+                        <div class="mb-3 input-group">
+                            <label for="data-inicio-medicamento-editar" class="input-group-text">Data de aplicação <span class="text-danger mx-1">*</span></label>
+                            <input type="date" class="form-control" id="data-aplicacao-medicamento-editar" required>
+                            <div class="invalid-feedback" id="invalid-feedback-data-aplicacao-medicamento-editar">
+                                Por favor, insira a data de aplicação do medicamento.
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 input-group">
+                            <label for="data-reforco-medicamento-editar" class="input-group-text">Data de Reforço <span class="text-danger mx-1">*</span></label>
+                            <input type="date" class="form-control" id="data-reforco-medicamento-editar" required>
+                            <div class="invalid-feedback" id="invalid-feedback-data-reforco-medicamento-editar">
+                                Por favor, insira a data de reforço do medicamento.
+                            </div>
+                        </div>
+
+                        <div class="mb-3 input-group">
+                            <label for="tipo-medicamento-editar" class="input-group-text">Tipo do medicamento <span class="text-danger mx-1">*</span></label>
+                            <select class="form-select" aria-label="Tipo do medicamento" id="tipo-medicamento-editar" required>
+                                <option selected hidden value="">Escolha</option>
+                                <option value="1">Vacina</option>
+                                <option value="2">Vermífugo</option>
+                              </select>
+                            <div class="invalid-feedback" id="invalid-feedback-tipo-medicamento-editar">
+                                Por favor, informe o tipo do medicamento.
+                            </div>
+                        </div>
+    
+                        <div class="mb-3 form-floating">
+                            <textarea class="form-control" placeholder="Detalhes e observações sobre o medicamento" id="detalhes-medicamento-editar" style="height: 100px"></textarea>
+                            <label for="detalhes-medicamento-editar">Detalhes</label>
+                        </div>
+    
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-success">Salvar alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="doenca-modal" tabindex="-1" aria-labelledby="doenca-modal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Registrar uma doença</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="needs-validation" id="form-doenca" novalidate>
+                <div class="mb-4">
+                    <div id="placeholder-doenca"></div>
+                </div>
+                <div>
+                    <p>
+                        Campos marcados com <span class="text-danger mx-1">*</span> são obrigatórios.
+                    </p>
+                </div>
+                <div class="mb-3 input-group">
+                    <label for="nome-doenca" class="input-group-text">Nome da doença <span class="text-danger mx-1">*</span></label>
+                    <input type="text" class="form-control" id="nome-doenca" required maxlength="200">
+                    <div class="invalid-feedback" id="invalid-feedback-nome-doenca">
+                        Por favor, insira o nome da doença.
+                    </div>
+                </div>
+                <div class="mb-3 form-floating">
+                    <textarea class="form-control" placeholder="Digite os sintomas" id="sintomas-doenca" style="height: 100px" required></textarea>
+                    <label for="sintomas-doenca">Sintomas <span class="text-danger mx-1">*</span></label>
+                    <div class="invalid-feedback" id="invalid-feedback-sintomas-doeca">
+                        Por favor, insira os sitomas da doença.
+                    </div>
+                </div>
+
+                <div class="mb-3 form-floating">
+                    <textarea class="form-control" placeholder="Descrição da doença" id="descricao-doenca" style="height: 100px"></textarea>
+                    <label for="descricao-doenca">Detalhes</label>
+                </div>
+
+                <div class="mb-3 input-group">
+                    <label for="data-diagnostico-doenca"  class="input-group-text">Data do diagnostico <span class="text-danger mx-1">*</span></label>
+                    <input type="date" class="form-control" id="data-diagnostico-doenca" required>
+                    <div class="invalid-feedback" id="invalid-feedback-data-diagnostico-doenca">
+                        Por favor, informe a data de diagnostico.
+                    </div>
+                </div>
+
+                <div class="mb-3 input-group">
+                    <label for="status-doenca" class="input-group-text">Status da doença <span class="text-danger mx-1">*</span></label>
+                    <select class="form-select" aria-label="Status da doença" id="status-doenca" required>
+                        <option selected hidden value="">Escolha</option>
+                        <option value="1">Em Tratamento</option>
+                        <option value="2">Recuperado</option>
+                        <option value="3">Crônico</option>
+                      </select>
+                    <div class="invalid-feedback" id="invalid-feedback-status-doenca">
+                        Por favor, informe a situação atual da doença.
+                    </div>
+                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     <button type="submit" class="btn btn-orange">Adicionar</button>

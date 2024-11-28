@@ -22,6 +22,45 @@ export async function makePostRequest(url, headers = {}, formData = {}, response
         return responseCaseErrorCatch()
     }
 }
+export async function putRequest(url, headers = {}, formData = {}, responseCaseOk = (response) => {}, responseCaseError = (response) => {}, responseCaseErrorCatch = () => {}) {
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+            'Content-Type': 'application/json',
+            ...headers
+            },
+            body: JSON.stringify(formData)
+        });
+        if (response.ok) {
+            return responseCaseOk(response);
+        } else {
+            return responseCaseError(response);
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+        return responseCaseErrorCatch()
+    }
+}
+export async function deleteRequest(url, headers, responseCaseOk = (response) => {}, responseCaseError = (response) => {}, responseCaseErrorCatch = () => {}) {
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE',
+            headers: {
+            'Content-Type': 'application/json',
+            ...headers
+            }
+        });
+        if (response.ok) {
+            return responseCaseOk(response);
+        } else {
+            return responseCaseError(response);
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+        return responseCaseErrorCatch()
+    }
+}
 export async function makeGetRequest(url, headers = {}, responseCaseOk = (response) => {}, responseCaseError = (response) => {}, responseCaseErrorCatch = () => {}) {
     try {
         const response = await fetch(url, {

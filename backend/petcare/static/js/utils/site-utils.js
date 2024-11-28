@@ -41,3 +41,8 @@ export function formatarData(value){
     return value
 }
 
+
+export function formatDateForInputDate(value){
+    return value.split('T')[0];
+}
+

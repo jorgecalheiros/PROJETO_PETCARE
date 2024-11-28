@@ -26,6 +26,14 @@ export function renderizarListaMedicamentos(data){
                     <p>Data da aplicação: <strong>${formatarData(item.date_application)}</strong></p>
                     <p>Data de reforço: <strong>${formatarData(item.date_reinforcement)}</strong></p>
                     <p>Detalhes: <strong>${item.details}</strong></p>
+                    <div class="mb-2">
+                        <button class="btn btn-primary" data-medicamento='${JSON.stringify(item)}' onclick="carregarDadosMedicamentoParaEdicao(this)" data-bs-toggle="modal" data-bs-target="#editar-medicamento-modal">
+                            Editar
+                        </button>
+                        <button class="btn btn-danger" data-id='${item.id}' onclick="excluirMedicamento(this)">
+                            Excluir
+                        </button>
+                    </div>
                 </div>
         `;
         list.append(linha);
@@ -34,9 +42,30 @@ export function renderizarListaMedicamentos(data){
 
 export function renderizarListaDoencas(data){
     const list = $("#list-doencas").empty();
+
     if (data.length == 0){
         list.append("<h5>Sem doenças documentadas.</h5>")
     }
+    data.forEach((item) => {
+        const linha = `
+               <div class="border-bottom mb-3">
+                    <p>Nome: <strong>${item.name}</strong></p>
+                    <p>Status: <strong>${item.illness_status.status}</strong></p>
+                    <p>Sintomas: <strong>${item.symptoms}</strong></p>
+                    <p>Descrição: <strong>${item.description}</strong></p>
+                    <p>Data do diagnostico: <strong>${formatarData(item.date_diagnosis)}</strong></p>
+                    <div class="mb-2">
+                        <button class="btn btn-primary" data-doenca='${JSON.stringify(item)}' onclick="carregarDadosDoencaParaEdicao(this)" data-bs-toggle="modal" data-bs-target="#editar-medicamento-modal">
+                            Editar
+                        </button>
+                        <button class="btn btn-danger" data-id='${item.id}' onclick="excluirDoenca(this)">
+                            Excluir
+                        </button>
+                    </div>
+                </div>
+        `;
+        list.append(linha);
+    })
 }
 
 export function renderizarNotFound(id){

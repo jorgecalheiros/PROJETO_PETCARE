@@ -8,6 +8,6 @@ class Illness(models.Model):
     illness_status = models.ForeignKey(IllnessStatus, on_delete=models.CASCADE, null=False)
     name = models.CharField(max_length=255)
     symptoms = models.TextField(null=True)
-    description = models.TextField(null=True)
+    description = models.TextField(null=True, blank=True)
     date_diagnosis = models.DateTimeField()
     medical_history = models.ForeignKey(MedicalHistory, on_delete=models.CASCADE, null=False, related_name='illnesses') 
