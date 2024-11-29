@@ -5,6 +5,11 @@ export function redirectTo(url, time = 0) {
         window.location = url
     }, time)
 }
+export function recarregarPagina(time=0){
+    setTimeout(() => {
+        window.location.reload(true)
+    }, time)
+}
 
 export function showAlert(message, type, placeholder){
     placeholder.innerHTML = "";
@@ -38,7 +43,17 @@ export function capturarUUID(){
 }
 
 export function formatarData(value){
-    return value
+    const data = new Date(value);
+
+    // Extrair partes da data
+    const dia = String(data.getUTCDate()).padStart(2, '0');
+    const mes = String(data.getUTCMonth() + 1).padStart(2, '0'); // Os meses são baseados em zero
+    const ano = data.getUTCFullYear();
+    const horas = String(data.getUTCHours()).padStart(2, '0');
+    const minutos = String(data.getUTCMinutes()).padStart(2, '0');
+
+    // Formatar no padrão desejado
+    return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
 }
 
 

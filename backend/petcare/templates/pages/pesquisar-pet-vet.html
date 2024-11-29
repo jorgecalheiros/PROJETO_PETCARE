@@ -16,15 +16,15 @@ PetCare - Pesquisar por um Pet
           <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
               <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                <u>PetCare</u>
+                <u>PetCare para clinicas</u>
               </a>
               <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                 <li>
-                  <a href="{% url 'inicio' %}" class="nav-link text-danger-emphasis">
+                  <a href="{% url 'painel' %}" class="nav-link text-danger-emphasis">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house d-block mx-auto mb-1" viewBox="0 0 16 16">
                         <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
                     </svg>
-                    Inicio
+                    Painel
                   </a>
                 </li>
               </ul>
@@ -58,98 +58,128 @@ PetCare - Pesquisar por um Pet
                 </form>
                 <br/>
                 <br/>
-                <div class="card p-3" id="hm-container">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-center">
-                            <p>Nome: <span id="nome"></span></p>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <p class="m-0">Código: <span id="codigo"></span></p>
-                        </div>
+                <div id="hm-container">
+                    <div>
+                        <nav class="nav nav-pills nav-fill">
+                            <a class="nav-link" href="#medicamentos">Medicamentos</a>
+                            <a class="nav-link" href="#doencas">Doeças</a>
+                            <a class="nav-link" href="#cirurgias">Cirurgias</a>
+                            <a class="nav-link" href="#consultas">Consultas</a>
+                        </nav>
                     </div>
-                    <div class="card-body">
-                        <div>
-                            <p>Raça: <strong id="raca"></strong></p>
-                            <p>Especie: <strong id="especie"></strong></p>
-                            <p>Idade: <strong id="idade"></strong></p>
-                            <p>Peso: <strong id="peso"></strong></p>
-                            <p>Genero: <strong id="genero"></strong></p>
-                            <p>Observações: <strong id="obs"></strong></p>
-                        </div>
-                        <br/>
-                        <div>
-                            <div class="d-lg-flex justify-content-between align-items-end mb-2">
-                                <h5><u>Medicamentos</u></h5>
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#medicamento-modal">
-                                    Adicionar um medicamento
-                                </button>
+                    <br/>
+                    <div class="card p-3">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-center">
+                                <p>Nome: <span id="nome"></span></p>
                             </div>
+                            <div class="d-flex justify-content-center">
+                                <p class="m-0">Código: <span id="codigo"></span></p>
+                            </div>
+                        </div>
+                        <div class="card-body">
                             <div>
-                                <div class="card p-3">
-                                    <div class="card-body" id="list-medicamentos">
-                                        <div class="border-bottom">
-                                            <p>Nome: <strong></strong></p>
-                                            <p>Tipo: <strong></strong></p>
-                                            <p>Data da aplicação: <strong></strong></p>
-                                            <p>Data de reforço: <strong></strong></p>
-                                            <p>Detalhes: <strong></strong></p>
+                                <p>Raça: <strong id="raca"></strong></p>
+                                <p>Especie: <strong id="especie"></strong></p>
+                                <p>Idade: <strong id="idade"></strong></p>
+                                <p>Peso: <strong id="peso"></strong></p>
+                                <p>Genero: <strong id="genero"></strong></p>
+                                <p>Observações: <strong id="obs"></strong></p>
+                            </div>
+                            <br/>
+                            <section id="medicamentos">
+                                <div>
+                                    <div class="d-lg-flex justify-content-between align-items-end mb-2">
+                                        <h5><u>Medicamentos</u></h5>
+                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#medicamento-modal">
+                                            Adicionar um medicamento
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <div class="card p-3">
+                                            <div class="card-body" id="list-medicamentos">
+                                                <div class="border-bottom">
+                                                    <p>Nome: <strong></strong></p>
+                                                    <p>Tipo: <strong></strong></p>
+                                                    <p>Data da aplicação: <strong></strong></p>
+                                                    <p>Data de reforço: <strong></strong></p>
+                                                    <p>Detalhes: <strong></strong></p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <br/>
-                        <div>
-                            <div class="d-lg-flex justify-content-between align-items-end mb-2">
-                                <h5><u>Doenças documentadas</u></h5>
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#doenca-modal">
-                                    Adicionar um doença 
-                                </button>
-                            </div>
-                            <div>
-                                <div class="card p-3">
-                                    <div class="card-body" id="list-doencas">
-                                        <div class="border-bottom">
-                                            <p>Nome: <strong></strong></p>
-                                            <p>Status: <strong></strong></p>
-                                            <p>Sintomas: <strong></strong></p>
-                                            <p>Descrição: <strong></strong></p>
-                                            <p>Data do diagnostico: <strong></strong></p>
+                            </section>
+                            <br/>
+                            <section id="doencas">
+                                <div>
+                                    <div class="d-lg-flex justify-content-between align-items-end mb-2">
+                                        <h5><u>Doenças documentadas</u></h5>
+                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#doenca-modal">
+                                            Adicionar um doença 
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <div class="card p-3">
+                                            <div class="card-body" id="list-doencas">
+                                                <div class="border-bottom">
+                                                    <p>Nome: <strong></strong></p>
+                                                    <p>Status: <strong></strong></p>
+                                                    <p>Sintomas: <strong></strong></p>
+                                                    <p>Descrição: <strong></strong></p>
+                                                    <p>Data do diagnostico: <strong></strong></p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <br/>
-                        <div>
-                            <h5><u>Cirurgias</u></h5>
-                            <div>
-                                <div class="card p-3" id="list-cirurgias">
-                                    <div class="card-body">
-                                        <div class="border-bottom">
-                                            <p>Nome: <strong></strong></p>
-                                            <p>Status: <strong></strong></p>
-                                            <p>Detalhes: <strong></strong></p>
-                                            <p>Data: <strong></strong></p>
+                            </section>
+                            <br/>
+                            <section id="cirurgias">
+                                <div>
+                                    <div class="d-lg-flex justify-content-between align-items-end mb-2">
+                                        <h5><u>Cirurgias</u></h5>
+                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cirurgia-modal">
+                                            Agendar uma cirurgia 
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <div class="card p-3">
+                                            <div class="card-body"  id="list-cirurgias">
+                                                <div class="border-bottom">
+                                                    <p>Nome: <strong></strong></p>
+                                                    <p>Status: <strong></strong></p>
+                                                    <p>Detalhes: <strong></strong></p>
+                                                    <p>Data: <strong></strong></p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <br/>
-                        <div>
-                            <h5><u>Consultas</u></h5>
-                            <div>
-                                <div class="card p-3" id="list-consultas">
-                                    <div class="card-body">
-                                        <div class="border-bottom">
-                                            <p>Razão: <strong></strong></p>
-                                            <p>Clinica: <strong></strong></p>
-                                            <p>Data: <strong></strong></p>
+                            </section>
+                            <br/>
+                            <section id="consultas">
+                                <div>
+                                    <div class="d-lg-flex justify-content-between align-items-end mb-2">
+                                        <h5><u>Consultas</u></h5>
+                                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#consulta-modal">
+                                            Agendar uma consulta 
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <div class="card p-3">
+                                            <div class="card-body" id="list-consultas">
+                                                <div class="border-bottom">
+                                                    <p>Razão: <strong></strong></p>
+                                                    <p>Veterinario: <strong></strong></p>
+                                                    <p>Clinica: <strong></strong></p>
+                                                    <p>Data: <strong></strong></p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </section>
                         </div>
                     </div>
                 </div>
@@ -417,6 +447,233 @@ PetCare - Pesquisar por um Pet
                     <button type="submit" class="btn btn-orange">Salvar</button>
                 </div>
               </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="cirurgia-modal" tabindex="-1" aria-labelledby="cirurgia-modal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Agendar uma cirurgia</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="needs-validation" id="form-cirurgia" novalidate>
+                <div class="mb-4">
+                    <div id="placeholder-cirurgia"></div>
+                </div>
+                <div>
+                    <p>
+                        Campos marcados com <span class="text-danger mx-1">*</span> são obrigatórios.
+                    </p>
+                </div>
+                <div class="mb-3 input-group">
+                    <label for="nome-cirurgia" class="input-group-text">Nome da cirurgia <span class="text-danger mx-1">*</span></label>
+                    <input type="text" class="form-control" id="nome-cirurgia" required maxlength="200">
+                    <div class="invalid-feedback" id="invalid-feedback-nome-cirurgia">
+                        Por favor, insira o nome da cirurgia.
+                    </div>
+                </div>
+                <div class="mb-3 form-floating">
+                    <textarea class="form-control" placeholder="Descrição da cirurgia" id="descricao-cirurgia" style="height: 100px"></textarea>
+                    <label for="descricao-cirurgia">Detalhes</label>
+                </div>
+
+                <div class="mb-3 input-group">
+                    <label for="data-cirurgia"  class="input-group-text">Data da cirurgia <span class="text-danger mx-1">*</span></label>
+                    <input type="datetime-local" class="form-control" id="data-cirurgia" required>
+                    <div class="invalid-feedback" id="invalid-feedback-data-cirurgia">
+                        Por favor, informe a data da cirurgia.
+                    </div>
+                </div>
+
+                <div class="mb-3 input-group">
+                    <label for="status-cirurgia" class="input-group-text">Status da doença <span class="text-danger mx-1">*</span></label>
+                    <select class="form-select" aria-label="Status da cirurgia" id="status-cirurgia" required>
+                        <option selected hidden value="">Escolha</option>
+                        <option value="1">Pendente</option>
+                        <option value="2">Realizada</option>
+                        <option value="3">Cancelada</option>
+                        <option value="4">Em Recuperação</option>
+                      </select>
+                    <div class="invalid-feedback" id="invalid-feedback-status-cirurgia">
+                        Por favor, informe a situação atual da cirurgia.
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-orange">Agendar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editar-cirurgia-modal" tabindex="-1" aria-labelledby="editar-cirurgia-modal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Editar uma cirurgia</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="needs-validation" id="form-cirurgia-editar" novalidate>
+                <div class="mb-4">
+                    <div id="placeholder-cirurgia-editar"></div>
+                </div>
+                <div>
+                    <p>
+                        Campos marcados com <span class="text-danger mx-1">*</span> são obrigatórios.
+                    </p>
+                </div>
+                <input type="hidden" id="id-cirurgia-editar" /> 
+                <div class="mb-3 input-group">
+                    <label for="nome-cirurgia-editar" class="input-group-text">Nome da cirurgia <span class="text-danger mx-1">*</span></label>
+                    <input type="text" class="form-control" id="nome-cirurgia-editar" required maxlength="200">
+                    <div class="invalid-feedback" id="invalid-feedback-nome-cirurgia-editar">
+                        Por favor, insira o nome da cirurgia.
+                    </div>
+                </div>
+                <div class="mb-3 form-floating">
+                    <textarea class="form-control" placeholder="Descrição da cirurgia" id="descricao-cirurgia-editar" style="height: 100px"></textarea>
+                    <label for="descricao-cirurgia-editar">Detalhes</label>
+                </div>
+
+                <div class="mb-3 input-group">
+                    <label for="data-cirurgia-editar" class="input-group-text">Data da cirurgia <span class="text-danger mx-1">*</span></label>
+                    <input type="datetime-local" class="form-control" id="data-cirurgia-editar" required>
+                    <div class="invalid-feedback" id="invalid-feedback-data-cirurgia-editar">
+                        Por favor, informe a data da cirurgia.
+                    </div>
+                </div>
+
+                <div class="mb-3 input-group">
+                    <label for="status-cirurgia-editar" class="input-group-text">Status da doença <span class="text-danger mx-1">*</span></label>
+                    <select class="form-select" aria-label="Status da cirurgia" id="status-cirurgia-editar" required>
+                        <option selected hidden value="">Escolha</option>
+                        <option value="1">Pendente</option>
+                        <option value="2">Realizada</option>
+                        <option value="3">Cancelada</option>
+                        <option value="4">Em Recuperação</option>
+                      </select>
+                    <div class="invalid-feedback" id="invalid-feedback-status-cirurgia-editar">
+                        Por favor, informe a situação atual da cirurgia.
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-orange">Salvar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="consulta-modal" tabindex="-1" aria-labelledby="consulta-modal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Agendar uma consulta</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="needs-validation" id="form-consulta" novalidate>
+                <div class="mb-4">
+                    <div id="placeholder-consulta"></div>
+                </div>
+                <div>
+                    <p>
+                        Campos marcados com <span class="text-danger mx-1">*</span> são obrigatórios.
+                    </p>
+                </div>
+                <div class="mb-3 input-group">
+                    <label for="razao-consulta" class="input-group-text">Razão da consulta <span class="text-danger mx-1">*</span></label>
+                    <input type="text" class="form-control" id="razao-consulta" required maxlength="200">
+                    <div class="invalid-feedback" id="invalid-feedback-razao-consulta">
+                        Por favor, insira a razão da consulta.
+                    </div>
+                </div>
+
+                <div class="mb-3 input-group">
+                    <label for="data-consulta"  class="input-group-text">Data da consulta <span class="text-danger mx-1">*</span></label>
+                    <input type="datetime-local" class="form-control" id="data-consulta" required>
+                    <div class="invalid-feedback" id="invalid-feedback-data-consulta">
+                        Por favor, informe a data da consulta.
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-orange">Agendar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="editar-consulta-modal" tabindex="-1" aria-labelledby="editar-consulta-modal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Editar uma consulta</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="needs-validation" id="form-consulta-editar" novalidate>
+                <div class="mb-4">
+                    <div id="placeholder-consulta-editar"></div>
+                </div>
+                <div>
+                    <p>
+                        Campos marcados com <span class="text-danger mx-1">*</span> são obrigatórios.
+                    </p>
+                </div>
+                <input type="hidden" id="id-consulta-editar" /> 
+                <div class="mb-3 input-group">
+                    <label for="razao-consulta-editar" class="input-group-text">Razão da consulta <span class="text-danger mx-1">*</span></label>
+                    <input type="text" class="form-control" id="razao-consulta-editar" required maxlength="200">
+                    <div class="invalid-feedback" id="invalid-feedback-razao-consulta-editar">
+                        Por favor, insira a razão da consulta.
+                    </div>
+                </div>
+
+                <div class="mb-3 input-group">
+                    <label for="data-consulta-editar"  class="input-group-text">Data da consulta <span class="text-danger mx-1">*</span></label>
+                    <input type="datetime-local" class="form-control" id="data-consulta-editar" required>
+                    <div class="invalid-feedback" id="invalid-feedback-data-consulta-editar">
+                        Por favor, informe a data da consulta.
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-orange">Agendar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="success-delete" tabindex="-1" aria-labelledby="success-delete" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="success-delete">Tenha certeza disso!</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" id="close" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Confirmar exclusão?</p>
+
+                <div id="result" class="mt-3">
+                        
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="reject-delete">Fechar</button>
+              <button type="button" class="btn btn-danger" id="confirm-delete">Excluir</button>
             </div>
           </div>
         </div>

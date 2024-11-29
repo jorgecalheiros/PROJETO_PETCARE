@@ -2,14 +2,16 @@ import {deleteRequest, makeGetRequest, makePostRequest, putRequest, setAuthoriza
 import {ROUTES_API, ROUTES_SITE} from "./utils/global.js";
 import {registrarPrototypes, validarCampo} from "./utils/form-utils.js";
 import {validarTexto} from "./utils/validations.js"; 
-import { capturarUUID, redirectTo, showAlert, formatDateForInputDate } from "./utils/site-utils.js";
-import {renderizarInformacoesBasicasDoPet, renderizarListaDoencas, renderizarListaMedicamentos, renderizarNotFound} from "./utils/medical_history_utils.js";
+import { capturarUUID, redirectTo, showAlert, formatDateForInputDate, recarregarPagina } from "./utils/site-utils.js";
+import {renderizarInformacoesBasicasDoPet, renderizarListaCirurgias, renderizarListaConsultas, renderizarListaDoencas, renderizarListaMedicamentos, renderizarNotFound} from "./utils/medical_history_utils.js";
 
 user_is_vet_registered(async(response) => {
 }, (response) => {
     tratamentosDeErros.accounts.unauthorized(response, ROUTES_SITE.bem_vindo);
     tratamentosDeErros.vet.is_not_a_vet(response);
 });
+
+const time_wait = 3000;
 
 document.addEventListener("DOMContentLoaded", async function(){
     const form = document.getElementById("formSearch");
@@ -37,11 +39,6 @@ document.addEventListener("DOMContentLoaded", async function(){
         }
     }
 
-    function iniciarFormularios(id){
-        initFormulariosMedicamentos(id)
-        initFormulariosDoencas(id)
-    }
-    
     async function preencherDadosDoPet(id){
         const headers = setAuthorizationTokenHeader();
         const url = `${ROUTES_API.vet_pets}/${id}`;
@@ -53,9 +50,17 @@ document.addEventListener("DOMContentLoaded", async function(){
             renderizarInformacoesBasicasDoPet(data);
             renderizarListaMedicamentos(data.medical_history.medicines);
             renderizarListaDoencas(data.medical_history.illnesses);
+            renderizarListaCirurgias(data.medical_history.surgeries);
+            renderizarListaConsultas(data.medical_history.queries);
         }, (response) => {
             renderizarNotFound("hm-container");
         })
+    }
+    function iniciarFormularios(id){
+        initFormulariosMedicamentos(id)
+        initFormulariosDoencas(id)
+        initFormulariosCirurgia(id)
+        initFormulariosConsulta(id)
     }
 
     function initFormulariosMedicamentos(id){
@@ -66,7 +71,7 @@ document.addEventListener("DOMContentLoaded", async function(){
                 if(response.ok){
                     const placeholder = document.getElementById("placeholder-medicamento");
                     showAlert("Medicamento cadastrado com sucesso!", "success", placeholder);
-                    redirectTo(window.location, 3000);
+                    recarregarPagina(time_wait);
                 }
             }, async(response) => {
                 const data = await response.json();
@@ -82,7 +87,7 @@ document.addEventListener("DOMContentLoaded", async function(){
                 if(response.ok){
                     const placeholder = document.getElementById("placeholder-medicamento-editar");
                     showAlert("Medicamento alterado com sucesso!", "success", placeholder);
-                    redirectTo(window.location, 3000);
+                    recarregarPagina(time_wait);
                 }
             }, async(response) => {
                 const data = await response.json();
@@ -99,7 +104,7 @@ document.addEventListener("DOMContentLoaded", async function(){
                 if(response.ok){
                     const placeholder = document.getElementById("placeholder-doenca");
                     showAlert("Doença cadastrado com sucesso!", "success", placeholder);
-                    redirectTo(window.location, 3000);
+                    recarregarPagina(time_wait);
                 }
             }, async(response) => {
                 const data = await response.json();
@@ -115,13 +120,79 @@ document.addEventListener("DOMContentLoaded", async function(){
                 if(response.ok){
                     const placeholder = document.getElementById("placeholder-doenca-editar");
                     showAlert("Doença alterada com sucesso!", "success", placeholder);
-                    redirectTo(window.location, 3000);
+                    recarregarPagina(time_wait);
                 }
             }, async(response) => {
                 const data = await response.json();
                 console.log(data);
             })
         })
+    }
+    function initFormulariosCirurgia(id){
+        const headers = setAuthorizationTokenHeader();
+        validarFormularioCirurgia("", async(data) => {
+            const url = `${ROUTES_API.vet_pets}/${id}/surgery/add/`;
+
+            await makePostRequest(url, headers, data, (response) => {
+                if(response.ok){
+                    const placeholder = document.getElementById("placeholder-cirurgia");
+                    showAlert("Cirurgia cadastrada com sucesso!", "success", placeholder);
+                    recarregarPagina(time_wait);
+                }
+            }, async(response) => {
+                const data = await response.json();
+                console.log(data);
+            })
+        });
+
+        validarFormularioCirurgia("-editar", async(data) => {
+            const idInput = document.getElementById("id-cirurgia-editar")
+            const url = `${ROUTES_API.vet_pets}/surgery/${idInput.value}/`;
+
+            await putRequest(url, headers, data, (response) => {
+                if(response.ok){
+                    const placeholder = document.getElementById("placeholder-cirurgia-editar");
+                    showAlert("Cirurgia alterada com sucesso!", "success", placeholder);
+                    recarregarPagina(time_wait);
+                }
+            }, async(response) => {
+                const data = await response.json();
+                console.log(data);
+            })
+        });
+    }
+    function initFormulariosConsulta(id){
+        const headers = setAuthorizationTokenHeader();
+        validarFormularioConsulta("", async(data) => {
+            const url = `${ROUTES_API.vet_pets}/${id}/consultation/add/`;
+
+            await makePostRequest(url, headers, data, (response) => {
+                if(response.ok){
+                    const placeholder = document.getElementById("placeholder-consulta");
+                    showAlert("Consulta cadastrada com sucesso!", "success", placeholder);
+                    recarregarPagina(time_wait);
+                }
+            }, async(response) => {
+                const data = await response.json();
+                console.log(data);
+            })
+        });
+
+        validarFormularioConsulta("-editar", async(data) => {
+            const idInput = document.getElementById("id-consulta-editar")
+            const url = `${ROUTES_API.vet_pets}/consultation/${idInput.value}/`;
+
+            await putRequest(url, headers, data, (response) => {
+                if(response.ok){
+                    const placeholder = document.getElementById("placeholder-consulta-editar");
+                    showAlert("Consulta alterada com sucesso!", "success", placeholder);
+                    recarregarPagina(time_wait);
+                }
+            }, async(response) => {
+                const data = await response.json();
+                console.log(data);
+            })
+        });
     }
 
     // Medicamentos
@@ -168,21 +239,11 @@ document.addEventListener("DOMContentLoaded", async function(){
     };
     window.excluirMedicamento = async function(buttonElement) {
         const id = buttonElement.dataset.id;
-
-        const headers = setAuthorizationTokenHeader();
         const url = `${ROUTES_API.vet_pets}/medicines/${id}/`;
-        
-        await deleteRequest(url, headers, (response) => {
-            if(response.ok){
-                redirectTo(window.location);
-            }
-        }, async(response) => {
-            const data = await response.json();
-            console.log(data);
-        })
-   
+        excluirRegistros(url)
     };
 
+    // Doencas
     function validarFormularioDoenca(prefix_id = "", callback = (dataValidated) => {}){
         const formRegistrarDoenca = document.getElementById("form-doenca" + prefix_id);
 
@@ -229,18 +290,119 @@ document.addEventListener("DOMContentLoaded", async function(){
     };
     window.excluirDoenca = async function(buttonElement) {
         const id = buttonElement.dataset.id;
-
-        const headers = setAuthorizationTokenHeader();
         const url = `${ROUTES_API.vet_pets}/illness/${id}/`;
-        
-        await deleteRequest(url, headers, (response) => {
-            if(response.ok){
-                redirectTo(window.location);
-            }
-        }, async(response) => {
-            const data = await response.json();
-            console.log(data);
-        })
-   
+        excluirRegistros(url)
     };
+
+    // Cirurgias
+    function validarFormularioCirurgia(prefix_id = "", callback = (dataValidated) => {}) {
+        const form = document.getElementById("form-cirurgia" + prefix_id);
+        const nomeCirurgia = document.getElementById("nome-cirurgia" + prefix_id);
+        const nomeCirurgiaFeedback = document.getElementById("invalid-feedback-nome-cirurgia" + prefix_id);
+        const descricaoCirurgia = document.getElementById("descricao-cirurgia" + prefix_id);
+        const dataCirurgia = document.getElementById("data-cirurgia" + prefix_id);
+        const dataCirurgiaFeedback = document.getElementById("invalid-feedback-data-cirurgia" + prefix_id);
+        const statusCirurgia = document.getElementById("status-cirurgia" + prefix_id);
+        const statusCirurgiaFeedback = document.getElementById("invalid-feedback-status-cirurgia" + prefix_id);
+    
+     
+        validarCampo(nomeCirurgia, nomeCirurgiaFeedback, validarTexto);
+        validarCampo(dataCirurgia, dataCirurgiaFeedback, validarTexto);
+        validarCampo(statusCirurgia, statusCirurgiaFeedback, validarTexto);
+
+        form.validarFormulario(() => {
+            const formData = {
+                name: nomeCirurgia.value,
+                details: descricaoCirurgia.value || "",
+                date: dataCirurgia.value,
+                surgery_status: statusCirurgia.value,
+            };
+
+            callback(formData);
+        })
+    }
+    window.carregarDadosCirurgiaParaEdicao = function(buttonElement) {
+        const data = JSON.parse(buttonElement.dataset.cirurgia);
+
+        document.getElementById("id-cirurgia-editar").value = data.id;
+        document.getElementById("nome-cirurgia-editar").value = data.name; 
+        document.getElementById("descricao-cirurgia-editar").value = data.details || ""; 
+        document.getElementById("data-cirurgia-editar").value = formatDateForInputDate(data.date); 
+        document.getElementById("status-cirurgia-editar").value = data.surgery_status.id; 
+    }
+    window.excluirCirurgia = async function (buttonElement) {
+        const id = buttonElement.dataset.id;
+        const url = `${ROUTES_API.vet_pets}/surgery/${id}/`;
+        excluirRegistros(url)
+    }
+
+    // Consultas
+    function validarFormularioConsulta(prefix_id = "", callback = (data) => {}){
+        const form = document.getElementById("form-consulta"+ prefix_id);
+        const razaoConsulta = document.getElementById("razao-consulta" + prefix_id);
+        const razaoConsultaFeedback = document.getElementById("invalid-feedback-razao-consulta" + prefix_id);
+        const dataConsulta = document.getElementById("data-consulta" + prefix_id);
+        const dataConsultaFeedback = document.getElementById("invalid-feedback-data-consulta" + prefix_id);
+
+    
+        validarCampo(razaoConsulta, razaoConsultaFeedback, validarTexto);
+        validarCampo(dataConsulta, dataConsultaFeedback, validarTexto);
+
+        form.validarFormulario(() => {
+            const formData = {
+                reason: razaoConsulta.value,
+                date: dataConsulta.value,
+            };
+
+            callback(formData);
+        })
+    }
+    window.carregarDadosConsultaParaEdicao = function (buttonElement) {
+        const data = JSON.parse(buttonElement.dataset.consulta);
+
+        document.getElementById("id-consulta-editar").value = data.id;
+        document.getElementById("razao-consulta-editar").value = data.reason; 
+        document.getElementById("data-consulta-editar").value = formatDateForInputDate(data.date); 
+    }
+    window.excluirConsulta = async function (buttonElement) {
+        const id = buttonElement.dataset.id;
+
+        const url = `${ROUTES_API.vet_pets}/consultation/${id}/`;
+        excluirRegistros(url);
+    }
+
+    window.excluirRegistros = async function(url) {
+        const button = document.getElementById("confirm-delete");
+        const reject = document.getElementById("reject-delete");
+        const close = document.getElementById("close");
+        const result = document.getElementById("result");
+    
+        const deleteRegister = async () => {
+            const headers = setAuthorizationTokenHeader();
+            result.innerHTML = '<p class="text-info">Excluindo...</p>';
+            await deleteRequest(
+                url,
+                headers,
+                (response) => {
+                    if (response.ok) {
+                        result.innerHTML = '<p class="text-success">Excluido</p>';
+                        recarregarPagina(3000);
+                    }
+                },
+                async (response) => {
+                    const data = await response.json();
+                    console.error("Erro ao excluir registro:", data);
+                }
+            );
+        };
+    
+        button.addEventListener("click", deleteRegister);
+    
+        reject.addEventListener("click", () => {
+            button.removeEventListener("click", deleteRegister);
+        });
+        close.addEventListener("click", () => {
+            button.removeEventListener("click", deleteRegister);
+        })
+    }
 });
