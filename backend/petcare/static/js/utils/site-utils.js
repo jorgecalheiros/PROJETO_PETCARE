@@ -61,3 +61,14 @@ export function formatDateForInputDate(value){
     return value.split('T')[0];
 }
 
+export function formatarParaInputDatetimeLocal(dataISO) {
+    const data = new Date(dataISO);
+
+    const dia = String(data.getUTCDate()).padStart(2, '0');
+    const mes = String(data.getUTCMonth() + 1).padStart(2, '0');
+    const ano = data.getUTCFullYear();
+    const horas = String(data.getUTCHours()).padStart(2, '0');
+    const minutos = String(data.getUTCMinutes()).padStart(2, '0');
+
+    return `${ano}-${mes}-${dia}T${horas}:${minutos}`;
+}

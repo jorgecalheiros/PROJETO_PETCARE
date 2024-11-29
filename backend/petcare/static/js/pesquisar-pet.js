@@ -2,7 +2,7 @@ import {deleteRequest, makeGetRequest, makePostRequest, putRequest, setAuthoriza
 import {ROUTES_API, ROUTES_SITE} from "./utils/global.js";
 import {registrarPrototypes, validarCampo} from "./utils/form-utils.js";
 import {validarTexto} from "./utils/validations.js"; 
-import { capturarUUID, redirectTo, showAlert, formatDateForInputDate, recarregarPagina } from "./utils/site-utils.js";
+import { capturarUUID, redirectTo, showAlert, formatDateForInputDate, recarregarPagina, formatarParaInputDatetimeLocal } from "./utils/site-utils.js";
 import {renderizarInformacoesBasicasDoPet, renderizarListaCirurgias, renderizarListaConsultas, renderizarListaDoencas, renderizarListaMedicamentos, renderizarNotFound} from "./utils/medical_history_utils.js";
 
 user_is_vet_registered(async(response) => {
@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", async function(){
         document.getElementById("id-cirurgia-editar").value = data.id;
         document.getElementById("nome-cirurgia-editar").value = data.name; 
         document.getElementById("descricao-cirurgia-editar").value = data.details || ""; 
-        document.getElementById("data-cirurgia-editar").value = formatDateForInputDate(data.date); 
+        document.getElementById("data-cirurgia-editar").value = formatarParaInputDatetimeLocal(data.date); 
         document.getElementById("status-cirurgia-editar").value = data.surgery_status.id; 
     }
     window.excluirCirurgia = async function (buttonElement) {
@@ -362,7 +362,7 @@ document.addEventListener("DOMContentLoaded", async function(){
 
         document.getElementById("id-consulta-editar").value = data.id;
         document.getElementById("razao-consulta-editar").value = data.reason; 
-        document.getElementById("data-consulta-editar").value = formatDateForInputDate(data.date); 
+        document.getElementById("data-consulta-editar").value = formatarParaInputDatetimeLocal(data.date); 
     }
     window.excluirConsulta = async function (buttonElement) {
         const id = buttonElement.dataset.id;
