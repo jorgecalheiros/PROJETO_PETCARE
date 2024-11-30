@@ -72,3 +72,17 @@ export function registrarPrototypes(){
         });
     }
 }
+
+export function desativarBotaoEAtivarLoading(id){
+    $(document).ready(function() {
+        const botao = $(`#${id}`).empty();
+        adicionarSpinnerAoBotao(botao); 
+    })
+}
+
+function adicionarSpinnerAoBotao(botao) {
+    const spinner = '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span>';
+    const textoLoading = '<span role="status">Loading...</span>';
+    $(botao).append(spinner + textoLoading);
+    $(botao).prop("disabled", true);
+}

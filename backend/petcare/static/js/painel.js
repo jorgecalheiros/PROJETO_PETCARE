@@ -16,5 +16,4 @@ document.addEventListener("DOMContentLoaded", async function(){
         const name = $("#name-vet").empty();
         name.append(data.name);
     }
-
 });

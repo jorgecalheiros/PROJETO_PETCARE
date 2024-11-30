@@ -1,0 +1,162 @@
+{%extends 'layouts/base.html'%}
+
+{%block title %}
+PetCare - Informações da Clinica
+{%endblock%}
+
+{%block styles%}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{%endblock%}
+
+{%block content%}
+<main>
+    <header>
+        <div class="px-3 py-2 text-white bg-orange">
+          <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+              <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                <u>PetCare para clinicas</u>
+              </a>
+              <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                <li>
+                  <a href="{% url 'painel' %}" class="nav-link text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house d-block mx-auto mb-1" viewBox="0 0 16 16">
+                        <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+                    </svg>
+                    Painel
+                  </a>
+                </li>
+                <li>
+                    <a href="{% url 'infoclinica' %}" class="nav-link text-danger-emphasis">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-building d-block mx-auto mb-1" viewBox="0 0 16 16">
+                            <path d="M4 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM7.5 5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zM4.5 8a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5z"/>
+                            <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zm11 0H3v14h3v-2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V15h3z"/>
+                        </svg>
+                        Clinica
+                    </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="px-3 py-2 border-bottom mb-3">
+          <div class="container d-flex flex-wrap justify-content-end">
+            <div class="text-end">
+              <button type="button" class="btn btn-danger" id="logout">Sair da minha conta</button>
+            </div>
+          </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="card p-3 border-0 shadow">
+            <div>
+                <h3 id="nome-clinica">Clinica</h3>
+                <br/>
+                <div>
+                    <p>CNPJ: <strong id="cnpj"></strong></p>
+                    <p>CEP: <strong id="cep"></strong></p>
+                    <p>Cidade: <strong id="cidade"></strong></p>
+                    <p>Estado: <strong id="estado"></strong></p>
+                </div>
+            </div>
+            <br/>
+            <div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h4>Veterinarios(as)</h4>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cadastrar-veterinario">
+                        Adicionar veterinario(a)
+                    </button>
+                </div>
+                <br/>
+                <div>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Telefone</th>
+                            <th scope="col">Cargo/Especialização</th>
+                          </tr>
+                        </thead>
+                        <tbody id="vet-list">
+                          
+                        </tbody>
+                      </table> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="cadastrar-veterinario" tabindex="-1" aria-labelledby="cadastrar-veterinario" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar veterinario(a)</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form class="needs-validation" id="cadastrar-vet" novalidate>
+                <div class="mb-3">
+                    <div id="placeholder-vet"></div>
+                </div>
+                <div>
+                    <p>
+                        Campos marcados com <span class="text-danger mx-1">*</span> são obrigatórios.
+                    </p>
+                </div>
+                <div class="mb-3 input-group">
+                    <label class="input-group-text" for="nome">Nome<span class="text-danger mx-1">*</span></label>
+                    <input type="text" class="form-control" id="nome" required maxlength="200" >
+                    <div class="invalid-feedback" id="invalid-feedback-nome">
+                        Por favor, insira o nome.
+                    </div>
+                </div>
+                <div class="mb-3 input-group">
+                    <label class="input-group-text" for="nome">Especialização/Cargo<span class="text-danger mx-1">*</span></label>
+                    <input type="text" class="form-control" id="especializacao" required maxlength="200" >
+                    <div class="invalid-feedback" id="invalid-feedback-especilizacao">
+                        Por favor, insira a especialização ou cargo.
+                    </div>
+                </div>
+                <div class="mb-3 input-group">
+                    <label class="input-group-text" for="telefone">Telefone<span class="text-danger mx-1">*</span></label>
+                    <input type="text" class="form-control" id="telefone" data-mask="+55 (00) 00000-0000" required maxlength="200" >
+                    <div class="invalid-feedback" id="invalid-feedback-telefone">
+                        Por favor, insira o telefone.
+                    </div>
+                </div>
+                <div class="mb-3 input-group">
+                    <label class="input-group-text" for="email">Email<span class="text-danger mx-1">*</span></label>
+                    <input type="email" class="form-control" id="email" required maxlength="200" >
+                    <div class="invalid-feedback" id="invalid-feedback-email">
+                        Por favor, insira o email.
+                    </div>
+                </div>
+                <div class="mb-3 input-group">
+                    <label class="input-group-text" for="password">Senha<span class="text-danger mx-1">*</span></label>
+                    <input type="password" class="form-control" id="password" required maxlength="200" >
+                    <div class="invalid-feedback" id="invalid-feedback-password">
+                        Por favor, insira a senha.
+                    </div>
+                </div>
+                <div class="mb-3 input-group">
+                    <label class="input-group-text" for="confirm-password">Confirme a sennha<span class="text-danger mx-1">*</span></label>
+                    <input type="password" class="form-control" id="confirm-passowrd" required maxlength="200" >
+                    <div class="invalid-feedback" id="invalid-feedback-confirm-password">
+                        Por favor, confirma a senha.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button class="btn btn-success" id="salvar-vet">Salvar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+</main>
+<script type="module" src="{% static 'js/scripts/logout-script.js' %}" data-button-id="logout"></script>
+<script src="{% static 'js/plugins/jQuery-Mask-Plugin-master/src/jquery.mask.js'%}"></script>
+<script type="module" src="{% static 'js/infoclinica.js' %}"></script>
+{%endblock%}

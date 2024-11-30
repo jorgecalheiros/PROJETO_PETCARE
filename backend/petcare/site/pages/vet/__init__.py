@@ -14,3 +14,6 @@ def pesquisar_por_um_pet(request):
 
 def pesquisar_por_um_pet_id(request, id):
     return render(request, f'{prefix}/pesquisar-pet-vet.html', {'pet': ''})
+
+def ver_informacoes_da_clinica(request):
+    return render(request, f'{prefix}/info-clinica.html')

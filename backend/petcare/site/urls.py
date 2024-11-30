@@ -19,4 +19,5 @@ urlpatterns = [
     path('painel', PainelView.as_view(), name="painel"),
     path('pesquisarpet', vet.pesquisar_por_um_pet, name="pesquisarpet"),
     path('pesquisarpet/<str:id>', vet.pesquisar_por_um_pet_id, name="pesquisarpetid"),
+    path('infoclinica', vet.ver_informacoes_da_clinica, name="infoclinica")
 ]
