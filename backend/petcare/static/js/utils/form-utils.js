@@ -82,7 +82,7 @@ export function desativarBotaoEAtivarLoading(id){
 
 function adicionarSpinnerAoBotao(botao) {
     const spinner = '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span>';
-    const textoLoading = '<span role="status">Loading...</span>';
+    const textoLoading = '<span role="status">Carregando...</span>';
     $(botao).append(spinner + textoLoading);
     $(botao).prop("disabled", true);
 }

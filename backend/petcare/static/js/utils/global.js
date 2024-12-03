@@ -24,6 +24,8 @@ export const ROUTES_API = {
     vet_pets: "/vet/pets",
     vet_clinic: "/vet/clinic",
     mirante_create: "/mirante/create-with-mirante/",
+    buscarclinicas: "/clinic/buscarclinicasproximas/",
+    clinicas : "/clinic"
 }
 
 export const ROUTES_SITE = {

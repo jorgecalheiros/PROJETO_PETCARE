@@ -1,1 +1,2 @@
 from .clinic_notauthenticated_viewset import ClinicNotAuthenticatedViewSet
+from .clinic_authenticated_viewset import ClinicAuthenticatedViewSet

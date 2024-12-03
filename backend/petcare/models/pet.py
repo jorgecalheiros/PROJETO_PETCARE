@@ -13,6 +13,6 @@ class Pet(models.Model):
     weight = models.DecimalField(null=False, decimal_places=2, max_digits=4, default=0.00)
     gender = models.ForeignKey(Gender, on_delete=models.CASCADE, null=False)
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE, null=False)
-    medical_history = models.OneToOneField(MedicalHistory, on_delete=models.CASCADE)
+    medical_history = models.OneToOneField(MedicalHistory, on_delete=models.CASCADE, related_name="pet")
     
     

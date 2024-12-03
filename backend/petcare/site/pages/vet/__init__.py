@@ -4,7 +4,6 @@ from .sou_clinica_vet import SouClinicaVetView
 from .painel import PainelView
 from .cadastrado_com_sucesso_vet import CadastradoComSucessoVetView
 
-# views.py
 from django.shortcuts import render
 
 prefix = 'pages'

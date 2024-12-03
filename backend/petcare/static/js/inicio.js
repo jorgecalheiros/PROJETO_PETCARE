@@ -8,13 +8,19 @@ user_have_register((response) => {}, (response) => {
 
 document.addEventListener("DOMContentLoaded", async function(){
     const headers = setAuthorizationTokenHeader();
-    const totalpets = $("#total-pets").empty(); 
+    const totalpets = $("#total-pets").empty();
+    const totalconsultas = $("#total-consultas").empty(); 
 
     await makeGetRequest(ROUTES_API.get_pets, headers, async(response) => {
         const data = await response.json();
         totalpets.append(data.length);
     });
-    
+    await makeGetRequest(`${ROUTES_API.get_pets}/buscartodasconsultas/`, headers, async(response) => {
+        const data = await response.json();
+        totalconsultas.append(data.length);
+    }, async (response) => {
+        console.log(await response.json());
+    });
 });
 
 //<img src="static/imgs/pluto.png" class="card-img-top align-self-center mt-2" alt="..." style="width: 50%;">

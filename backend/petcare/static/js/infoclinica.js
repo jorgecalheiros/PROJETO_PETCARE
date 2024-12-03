@@ -1,7 +1,7 @@
 import {tratamentosDeErros, user_is_vet_registered, makeGetRequest, setAuthorizationTokenHeader, makePostRequest} from './utils/api-utils.js';
 import { registrarPrototypes, validarCampo, desativarBotaoEAtivarLoading } from './utils/form-utils.js';
 import {ROUTES_API, ROUTES_SITE} from "./utils/global.js";
-import { recarregarPagina, showAlert } from './utils/site-utils.js';
+import { recarregarPagina, showAlert, formatCNPJ, formatCEP } from './utils/site-utils.js';
 import { removeCarecteresNaoNumericos, validarConfirmSenha, validarSenha, validarTelefone, validarTexto } from './utils/validations.js';
 
 document.addEventListener("DOMContentLoaded", async function(){
@@ -39,26 +39,6 @@ document.addEventListener("DOMContentLoaded", async function(){
         iniciarFormularios();
     }
 
-    const formatCNPJ = (value) => {
-        const numericValue = value.replace(/\D/g, '');
-    
-        if (numericValue.length !== 14) {
-            throw new Error('O valor precisa conter exatamente 14 dígitos.');
-        }
-        
-        return numericValue.replace(
-            /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
-            '$1.$2.$3/$4-$5'
-        );
-    }
-    const formatCEP = (value) => {
-        const numericValue = value.replace(/\D/g, '');
-    
-        if (numericValue.length !== 8) {
-            throw new Error('O valor precisa conter exatamente 8 dígitos.');
-        }
-        return numericValue.replace(/^(\d{5})(\d{3})$/, '$1-$2');
-    }
     const renderizarListVet = (list) => {
         const element = $("#vet-list").empty();
 

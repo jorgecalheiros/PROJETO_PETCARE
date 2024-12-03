@@ -1,5 +1,6 @@
 from .base_owner_viewset import BaseOwnerAuthenticatedViewSet, mixins, Response, status, action
-from ...serializers import OwnerSaveSerializer, OwnerSerializer, AddressSerializer, OwnerSavePhotoSerializer
+from ...serializers import OwnerSaveSerializer, OwnerSerializer, AddressSerializer, OwnerSavePhotoSerializer, ClinicSerializer
+from ....models import Clinic
 
 class OwnerViewSet(BaseOwnerAuthenticatedViewSet, mixins.CreateModelMixin, mixins.UpdateModelMixin):
     def get_serializer_class(self):

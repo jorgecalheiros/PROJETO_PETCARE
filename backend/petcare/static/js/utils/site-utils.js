@@ -56,6 +56,27 @@ export function formatarData(value){
     return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
 }
 
+export const formatCNPJ = (value) => {
+    const numericValue = value.replace(/\D/g, '');
+
+    if (numericValue.length !== 14) {
+        throw new Error('O valor precisa conter exatamente 14 dígitos.');
+    }
+    
+    return numericValue.replace(
+        /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
+        '$1.$2.$3/$4-$5'
+    );
+}
+export const formatCEP = (value) => {
+    const numericValue = value.replace(/\D/g, '');
+
+    if (numericValue.length !== 8) {
+        throw new Error('O valor precisa conter exatamente 8 dígitos.');
+    }
+    return numericValue.replace(/^(\d{5})(\d{3})$/, '$1-$2');
+}
+
 
 export function formatDateForInputDate(value){
     return value.split('T')[0];

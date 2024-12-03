@@ -6,3 +6,11 @@
 .icon {
     font-size: 70px;
 }
+
+.jumbotron {
+    padding-top: var(3rem);
+    padding-bottom: var(3rem);
+    padding: 2rem 1rem;
+    margin-bottom: 0;
+    background-color: #fff;
+}

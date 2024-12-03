@@ -1,7 +1,7 @@
 import {makePostRequest, tratamentosDeErros, makeLogin} from './utils/api-utils.js';
 import {redirectTo, showAlert} from './utils/site-utils.js';
 import {ROUTES_API, ROUTES_SITE} from './utils/global.js';
-import {validarCampo} from './utils/form-utils.js';
+import {validarCampo, desativarBotaoEAtivarLoading} from './utils/form-utils.js';
 import {validarSenha, validarConfirmSenha, validarTexto} from './utils/validations.js';
 
 
