@@ -1,7 +1,8 @@
 import pytest
+import os
 from django.core.files.uploadedfile import SimpleUploadedFile
 from petcare.models import Owner, Address
-from authentication.models import Account  
+from authentication.models import Account
 
 
 @pytest.mark.django_db

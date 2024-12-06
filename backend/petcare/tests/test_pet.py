@@ -6,16 +6,13 @@ from petcare.models import Pet, Owner, Gender, MedicalHistory
 def test_criacao_pet_valido():
     """Teste de criação de um animal de estimação com dados válidos."""
     # Criando registros relacionados
-    gender = Gender.objects.create(name="Macho")
+    gender = Gender.objects.create(description="Macho", id=1)
     owner = Owner.objects.create(
         name="João Silva",
         cpf="12345678901",
         phone="11999999999"
     )
-    medical_history = MedicalHistory.objects.create(
-        patient_name="Rex",
-        diagnosis="Alergia alimentar"
-    )
+    medical_history = MedicalHistory.objects.create()
 
     # Criando o pet
     pet = Pet.objects.create(
@@ -44,16 +41,13 @@ def test_criacao_pet_valido():
 @pytest.mark.django_db
 def test_pet_campos_obrigatorios():
     """Teste para verificar a ausência de campos obrigatórios."""
-    gender = Gender.objects.create(name="Fêmea")
+    gender = Gender.objects.create(description="Fêmea", id=1)
     owner = Owner.objects.create(
         name="Maria Oliveira",
         cpf="98765432100",
         phone="21999999999"
     )
-    medical_history = MedicalHistory.objects.create(
-        patient_name="Bella",
-        diagnosis="Vacinação em dia"
-    )
+    medical_history = MedicalHistory.objects.create()
 
     # Tentativa de criar um pet sem nome
     with pytest.raises(Exception):
@@ -85,16 +79,13 @@ def test_pet_campos_obrigatorios():
 @pytest.mark.django_db
 def test_pet_relacionamentos():
     """Teste para verificar os relacionamentos com `Owner`, `Gender` e `MedicalHistory`."""
-    gender = Gender.objects.create(name="Macho")
+    gender = Gender.objects.create(description="Macho", id=1)
     owner = Owner.objects.create(
         name="Carlos Santos",
         cpf="11223344556",
         phone="31999999999"
     )
-    medical_history = MedicalHistory.objects.create(
-        patient_name="Thor",
-        diagnosis="Fratura no membro anterior"
-    )
+    medical_history = MedicalHistory.objects.create()
 
     # Criando o pet
     pet = Pet.objects.create(
@@ -109,24 +100,20 @@ def test_pet_relacionamentos():
     )
 
     # Verificando os relacionamentos
-    assert pet.gender.name == "Macho"
+    assert pet.gender.description == "Macho"
     assert pet.owner.name == "Carlos Santos"
-    assert pet.medical_history.patient_name == "Thor"
 
 
 @pytest.mark.django_db
 def test_pet_exclusao_relacionamentos():
     """Teste para verificar a integridade referencial ao excluir registros relacionados."""
-    gender = Gender.objects.create(name="Fêmea")
+    gender = Gender.objects.create(description="Fêmea", id=1)
     owner = Owner.objects.create(
         name="Ana Paula",
         cpf="55667788990",
         phone="41999999999"
     )
-    medical_history = MedicalHistory.objects.create(
-        patient_name="Mila",
-        diagnosis="Obesidade leve"
-    )
+    medical_history = MedicalHistory.objects.create()
 
     # Criando o pet
     pet = Pet.objects.create(
@@ -145,4 +132,4 @@ def test_pet_exclusao_relacionamentos():
     assert not Pet.objects.filter(name="Mila").exists()
 
     # Excluindo o medical_history e verificando que ele foi removido
-    assert not MedicalHistory.objects.filter(patient_name="Mila").exists()
+    assert not MedicalHistory.objects.filter(pet__name="Mila").exists()

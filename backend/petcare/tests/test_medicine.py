@@ -6,8 +6,8 @@ from petcare.models import Medicine, MedicineType, MedicalHistory
 def test_criacao_medicamento_valido():
     """Teste de criação de um medicamento válido."""
     # Criando os registros necessários para as relações
-    tipo_medicamento = MedicineType.objects.create(name="Antibiótico")
-    historico_medico = MedicalHistory.objects.create(patient_name="João Silva", diagnosis="Infecção")
+    tipo_medicamento = MedicineType.objects.create(id=1,type="Antibiótico")
+    historico_medico = MedicalHistory.objects.create()
 
     # Criando o medicamento
     medicamento = Medicine.objects.create(
@@ -29,8 +29,8 @@ def test_criacao_medicamento_valido():
 @pytest.mark.django_db
 def test_medicamento_sem_detalhes():
     """Teste de criação de medicamento sem preencher o campo opcional 'details'."""
-    tipo_medicamento = MedicineType.objects.create(name="Vacina")
-    historico_medico = MedicalHistory.objects.create(patient_name="Maria Oliveira", diagnosis="Alergia")
+    tipo_medicamento = MedicineType.objects.create(id=1, type="Vacina")
+    historico_medico = MedicalHistory.objects.create()
 
     medicamento = Medicine.objects.create(
         medicine_type=tipo_medicamento,
@@ -48,8 +48,8 @@ def test_medicamento_sem_detalhes():
 @pytest.mark.django_db
 def test_medicamento_sem_campos_obrigatorios():
     """Teste de falha ao criar medicamento sem preencher campos obrigatórios."""
-    tipo_medicamento = MedicineType.objects.create(name="Analgésico")
-    historico_medico = MedicalHistory.objects.create(patient_name="Carlos Mendes", diagnosis="Dor crônica")
+    tipo_medicamento = MedicineType.objects.create(id=1, type="Analgésico")
+    historico_medico = MedicalHistory.objects.create()
 
     with pytest.raises(Exception):
         Medicine.objects.create(
@@ -72,8 +72,8 @@ def test_medicamento_sem_campos_obrigatorios():
 @pytest.mark.django_db
 def test_relacao_medicamentos_historico():
     """Teste de relação entre histórico médico e medicamentos."""
-    tipo_medicamento = MedicineType.objects.create(name="Antibiótico")
-    historico_medico = MedicalHistory.objects.create(patient_name="Ana Paula", diagnosis="Infecção grave")
+    tipo_medicamento = MedicineType.objects.create(id=1, type="Antibiótico")
+    historico_medico = MedicalHistory.objects.create()
 
     # Criando dois medicamentos para o mesmo histórico médico
     medicamento1 = Medicine.objects.create(

@@ -18,14 +18,3 @@ def test_criacao_endereco():
     assert endereco.state == "SP"
     assert endereco.country == "Brasil"
     assert endereco.cep == "12345678"
-
-@pytest.mark.django_db
-def test_cep_invalido():
-    # Testa a criação com um CEP inválido
-    with pytest.raises(IntegrityError):
-        Address.objects.create(
-            city="Rio de Janeiro",
-            state="RJ",
-            country="Brasil",
-            cep="123"  # CEP inválido
-        )

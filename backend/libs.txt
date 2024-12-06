@@ -5,3 +5,5 @@ python-decouple
 setuptools
 Pillow
 requests
+pytest-django
+pytest
